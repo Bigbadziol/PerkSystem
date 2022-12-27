@@ -1,0 +1,16 @@
+/give @p minecraft:player_head{display:{Name:"{\"text\":\"Diamond Gift\"}"},
+SkullOwner:{Id:[I;-168448369,230706505,-1264922710,-797731259],Properties:{textures:[
+{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTNiZDlmNzZjMjhjZDI0MjEzM2MxYzNjNjYzM2UzZTU4NDc3NjhjODk0YTQwODljZjBmN2E3ZGI3MjM5ZGMyYyJ9fX0="}]}}} 1
+
+/setblock ~ ~1 ~ minecraft:player_head[rotation=0]{SkullOwner:{Id:[I;-168448369,230706505,-1264922710,-797731259],Properties:{textures:[
+{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTNiZDlmNzZjMjhjZDI0MjEzM2MxYzNjNjYzM2UzZTU4NDc3NjhjODk0YTQwODljZjBmN2E3ZGI3MjM5ZGMyYyJ9fX0="}]}}} replace
+
+/give @p minecraft:player_head{display:{Name:"{\"text\":\"Gold Gift\"}"},SkullOwner:{Id:[I;-1194925435,-294303564,-1308175883,-787448869],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWRmNjMzZWUxM2JmZjhlYzEyZDI4ZjAxNjJlZDZhOTFkMTJhZTE0NWMyNTNmZDhkOWJjMTM3NjVjYjdiMDBlMyJ9fX0="}]}}} 1
+
+/give @p minecraft:player_head{display:{Name:"{\"text\":\"Lego Set Gift\"}"},SkullOwner:{Id:[I;-1850612487,1017661620,-1360975136,1138613105],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYWZiNTZhZWRmMzJjYjRlZTNjYWJmN2U2Mjg0YTJjN2UzZTFjYmQwNDY3YmI5NzgwNjQ4MWY1NjM2YTI1MzE4ZSJ9fX0="}]}}} 1
+
+/give @p minecraft:player_head{display:{Name:"{\"text\":\"Rubber Ducky Gift\"}"},SkullOwner:{Id:[I;-237725034,-1588508275,-1517151283,-1198496665],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjIwYzJiNzkxYzJmYmY0NTFhYmVlZjIzNTI1ZjMxM2FmMTQzN2QyZmNhYjY5YzMyNzM0ZDM3OWI2NTZhZjE1ZiJ9fX0="}]}}} 1
+
+/give @p minecraft:player_head{display:{Name:"{\"text\":\"Pufferfish Gift\"}"},SkullOwner:{Id:[I;-1266251178,93342319,-1974350428,2008913401],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTZjYjhkMzliNDMxYzVmYWU5MTNhMmUzYTA3YjFiM2IzM2I4Yzg3MWQ1NjRmMTIzNzAyMTQ2ZmMwZWNjZjVmMyJ9fX0="}]}}} 1
+
+/give @p minecraft:player_head{display:{Name:"{\"text\":\"Pufferfish Gift\"}"},SkullOwner:{Id:[I;1838458537,1759920428,-1525527592,-779890345],Properties:{textures:[{Value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjg1N2IwODZkZjYxNDc1MjVlMTMxODgyOWQ0ODdjNmJjZTI1MDE0YzMxZTYwNjkyZGY1MDkyZjMzOTIwMDVhOSJ9fX0="}]}}} 1

@@ -1,0 +1,41 @@
+name: PerkSystem
+version: '${project.version}'
+main: badziol.perksystem.PerkSystem
+api-version: 1.19
+commands:
+  pg:
+    description: Komenda do graficznej obslugi perkow
+    usage: </command>
+  perk:
+    description: Komenda dla administratora
+    usage: </command>
+  prk:
+    description: Testowa wersja z autouzupelnianiem
+    usage: </command>
+  ikar:
+    description: Uruchomienie Ikara komenda
+    usage: </command>
+  ser64:
+    description:  Komenda do serializowania przedmiotu w lewej rece metoda base64
+    usage: </command>
+  serjson:
+    description:  Komenda do serializowania przedmiotu w lewej rece json
+    usage: </command>
+  cd:
+    description:  Test cooldownu do dowolnej rzeczy, pod perki
+    usage: </command>
+  lot:
+    description: Test innego przekazania danych do komendy
+    usage: </command>
+  speed:
+    description: Symulowanie wypicia pota speed
+    usage: </command>
+  despeed:
+    description: Wylaczenie pota speed
+    usage: </command>
+  ksiazka:
+    description: Tworzenie ksiazki z opisem
+    usage: </command>
+  par:
+    description: Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
+    usage: </command>
