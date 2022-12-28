@@ -466,12 +466,12 @@ public class PerkLista {
         return true;
     }
 
-    //todo : napisac metode....
+
     /**
-     * Metoda prawdza liste wszystkich posiadaczy perkow pod katem :
+     * Metoda sprawdza liste wszystkich posiadaczy perkow pod katem :
      * Czy ilosc aktywnych perkow jest zgodna z limitem
      * Czy aktywne perki wystepuja na liscie wszystkich perkow, jesli nie , ustaw  perk na 'nieustawiony'
-     * Czy zdobyte perki wystepuja na liscie wszystkih perkow, jesli nie , ustaw perk na 'nieustawiony'
+     * Czy zdobyte perki wystepuja na liscie wszystkich perkow, jesli nie , ustaw perk na 'nieustawiony'
      *
      * @return true - jesli nie wykrto zadnych problemow , false - jesli zaszla potrzeba dokonania zmian
      */
@@ -510,7 +510,7 @@ public class PerkLista {
      * Wczytaj dane z pliku
      * @throws IOException bledy odczytu pliku
      */
-    public void wczytajPlik()throws IOException {
+    public boolean wczytajPlik()throws IOException {
         Gson gson = new Gson();
         File file = new File(PerkSystem.getPlugin().getDataFolder().getAbsolutePath() + NAZWA_PLIKU);
         if (file.exists()){
@@ -518,8 +518,10 @@ public class PerkLista {
             PosiadaczPerkow[] nowePerki = gson.fromJson(reader, PosiadaczPerkow[].class);
             posiadaczePerkow.addAll(Arrays.asList(nowePerki));
             System.out.println("[PL] Perki wczytane.");
+            return true;
         }else{
             System.out.println("[PL] - plik z perkami graczy  nie istnieje.");
+            return false;
         }
     }
 

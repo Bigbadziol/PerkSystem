@@ -66,6 +66,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public final class PerkSystem extends JavaPlugin {
@@ -81,7 +82,7 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.21");
+        System.out.println("(PerkSystem) wersja : 1.22");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
@@ -92,25 +93,36 @@ public final class PerkSystem extends JavaPlugin {
         System.out.println("/serjson - serializowanie obiektu (lewa eka) gsonem");
         System.out.println("/cd - test  odpalenia czegos na cooldown, domyslnie 5 sek");
         System.out.println("/lot - test przekazania referencji do pluginu w inny sposob.");
+        System.out.println("/speed - szybsze chodzenie - zmiana atrybutow postaci");
+        System.out.println("/despeed - walniejsze chodzenie - jak wyzej.");
+        System.out.println("/ksiazka - tworzenie i otwieranie ksiazki");
         System.out.println("/cooldown - blokowanie samej z siebie komendy na okreslony czas");
         System.out.println("/par [liczba] 1...n - testowanie roznych typow czastek");
         System.out.println("------------------------------------------");
-        getCommand("perk").setExecutor(new komendaPerk(this));
-        getCommand("perk").setTabCompleter(new TabPerk(this));
-        getCommand("pg").setExecutor(new komendaPG(this));
-        getCommand("ikar").setExecutor(new komendaIkar(this));
+        Objects.requireNonNull(getCommand("perk")).setExecutor(new komendaPerk(this));
+        Objects.requireNonNull(getCommand("perk")).setTabCompleter(new TabPerk(this));
+        Objects.requireNonNull(getCommand("pg")).setExecutor(new komendaPG(this));
+        Objects.requireNonNull(getCommand("ikar")).setExecutor(new komendaIkar(this));
 
 
-        getCommand("ser64").setExecutor(new komendaSerializeBase64());
-        getCommand("serjson").setExecutor(new komendaSerializeJson());
-        getCommand("cd").setExecutor(new komendaCooldown());
-        getCommand("lot").setExecutor(new komendaLot(this));
-        getCommand("speed").setExecutor(new komendaSpeed());
-        getCommand("despeed").setExecutor(new komendaDespeed());
-        getCommand("ksiazka").setExecutor(new komendaKsiazka());
-        getCommand("par").setExecutor(new komendaParticles(this));
+        Objects.requireNonNull(getCommand("ser64")).setExecutor(new komendaSerializeBase64());
+        Objects.requireNonNull(getCommand("serjson")).setExecutor(new komendaSerializeJson());
+        Objects.requireNonNull(getCommand("cd")).setExecutor(new komendaCooldown());
+        Objects.requireNonNull(getCommand("lot")).setExecutor(new komendaLot(this));
+        Objects.requireNonNull(getCommand("speed")).setExecutor(new komendaSpeed());
+        Objects.requireNonNull(getCommand("despeed")).setExecutor(new komendaDespeed());
+        Objects.requireNonNull(getCommand("ksiazka")).setExecutor(new komendaKsiazka());
+        Objects.requireNonNull(getCommand("par")).setExecutor(new komendaParticles(this));
         try {
-            perkLista.wczytajPlik();
+            boolean wczytanie;
+            boolean kontrola = false;
+            wczytanie = perkLista.wczytajPlik();
+            if (wczytanie) kontrola = perkLista.kontrolaIntegralnosciDanych();
+            if (kontrola){
+                System.out.println("(PerkSystem) - nie wykryto problemow z integralnoscia danych.");
+            }else{
+                System.out.println("(PerkSystem) - wykonano kroki niezbedne do przywrocenia integralnosci danych." );
+            }
         } catch (IOException e) {
             //e.printStackTrace();
             System.out.println("[PerkSystem] - plik pewnie nie istnieje.");
@@ -124,7 +136,7 @@ public final class PerkSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PerkWampir(this),this);
         getServer().getPluginManager().registerEvents(new PerkKevlar(this),this);
         //...
-        getServer().getPluginManager().registerEvents(new PerkKrwawiaceRany(this),this);
+        getServer().getPluginManager().registerEvents(new PerkKrwawiaceRany(this), this);
         //zabawa czastkami
         getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
         //ZADANIA

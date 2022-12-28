@@ -7,11 +7,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-import static badziol.perksystem.perk.PerkStale.POZYCJA_ZAMIENIANEJ_GLOWKI;
+import static badziol.perksystem.perk.PerkStale.*;
 
 public class PerkGui {
     private final PerkSystem plugin;
@@ -67,8 +68,7 @@ public class PerkGui {
      * @param player -gracz
      */
     public void menuGlowne(Player player){
-        System.out.println("------------------------");
-        System.out.println("[GUI](mg) -  Menu glowne");
+        System.out.println("[GUI](mg) -  Menu glowne  ------------------------");
         Inventory inventory = Bukkit.createInventory(player, 27, menuGlowneNaglowek);
         String imieGracza = player.getName();
         PosiadaczPerkow gracz = plugin.perkLista.pobierzPosiadacza(imieGracza);
@@ -90,19 +90,26 @@ public class PerkGui {
                 return;
             }
         }
-        System.out.println("------------------------");
+        //oszustwo instrukcja - czesc 1 , czesc 2 - w ListenerMenu
+        //tu tworzymy tak naprawde 'symbol' przedmiotu (grafika,opisy)
+        //chodzi o to by przedmiot pokazal sie w menu.
+        ItemStack ksiazka = new ItemStack(Material.WRITTEN_BOOK, 1);
+        BookMeta ksiazkaMeta = (BookMeta) ksiazka.getItemMeta();
+        ksiazkaMeta.setTitle(INSTRUKCJA_TYTUL);
+        ksiazkaMeta.setAuthor(INSTRUKCJA_AUTOR);
+        ksiazka.setItemMeta(ksiazkaMeta);
+        inventory.setItem(8,ksiazka);
 
+        System.out.println("--------------------------------------------------");
         //Otwarcie inwentarza
         player.openInventory(inventory);
     }
 
 
     public void menuWyborPerka(Player player, ItemStack zmienianaGlowka) {
-        System.out.println("------------------------");
-        System.out.println("[GUI](wp) - Wybor perka");
+        System.out.println("[GUI](wp) - Wybor perka --------------------------");
         Inventory inv = Bukkit.createInventory(player, 54, menuWyborPerkaNaglowek);
         inv.clear();
-        inv.setItem(POZYCJA_ZAMIENIANEJ_GLOWKI, zmienianaGlowka); //ustaw na środku
 
         String imieGracza = player.getName();
         PosiadaczPerkow posiadacz = plugin.perkLista.pobierzPosiadacza(imieGracza);
@@ -110,22 +117,27 @@ public class PerkGui {
             System.out.println("[GUI](wp) - player nie wystepuje na liscie posiadaczy perkow - BLAD KRYTYCZNY");
             return;
         }
-
-        ItemStack linia = new ItemStack(Material.COAL_BLOCK);
+        //tlo glowki (bloki lewo i prawo) , oraz linia rozdzielajaca do wyboru perkow
+        ItemStack linia = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         ItemMeta liniaMeta = linia.getItemMeta();
         if (liniaMeta != null){
-            liniaMeta.setDisplayName("-------");
+            liniaMeta.setDisplayName("");
         }
         linia.setItemMeta(liniaMeta);
 
-        for (int i=9;i<18;i++){
+        for (int i=0;i<18;i++){ //od 9
             inv.setItem(i,linia);
         }
+        // ustaw aktualnie wybrana glowke na środku
+        inv.setItem(POZYCJA_ZAMIENIANEJ_GLOWKI, zmienianaGlowka);
+        //listaw wszystkich mozliwych do wyboru (z wykluczonymi aktualnie ustawionymi)
         ArrayList<ItemStack> glowkiWybor = plugin.perkLista.pobierzGlowkiWybor(imieGracza);
         for (int i = 0; i <glowkiWybor.size() ; i++) {
             ItemStack taGlowka = glowkiWybor.get(i);
             inv.setItem(18+i,taGlowka);
         }
+        System.out.println("--------------------------------------------------");
+        //otworz inwentarz
         player.openInventory(inv);
     }
 

@@ -10,7 +10,7 @@ import static badziol.perksystem.PerkSystem.getPlugin;
 
 public class ZadanieKrwawiaceRany extends BukkitRunnable {
     private PerkSystem plugin;
-    private PerkKrwawiaceRany zadanie;
+    private final PerkKrwawiaceRany zadanie;
 
     public ZadanieKrwawiaceRany(PerkSystem plugin) {
         this.plugin = plugin;
