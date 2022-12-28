@@ -82,7 +82,7 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.22");
+        System.out.println("(PerkSystem) wersja : 1.23");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");

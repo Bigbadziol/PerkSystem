@@ -45,7 +45,10 @@ public class TabPerk implements TabCompleter {
         }
         // tutaj musi sie znalezc :limit, +,++ , -,--, napraw jesli wczesniejszy parametr to nie 'lista' a [imie]
         else if (args.length == 2){
-            if (!args[0].equalsIgnoreCase("lista")){  //nie lista , zatem imie
+            if (args[0].equalsIgnoreCase("lista")){
+                podpowiedz.clear();
+                return podpowiedz; //po lista nie chcemy podpowiedzi
+            }else{
                 podpowiedz.clear();
                 podpowiedz.add("limit");
                 podpowiedz.add("+");
@@ -65,7 +68,9 @@ public class TabPerk implements TabCompleter {
                return podpowiedz;
            }
            //wczesniejsze to +,++, - , --
-           else{
+           //badamy + , - bo dla pozostałych null
+           else if (args[1].equalsIgnoreCase("+") ||
+                    args[1].equalsIgnoreCase("-") ){
                 //na podstawie pisanej nazwy perka z listy wszystkich perkow dodaj tylko te
                 // ktore sie zaczynaja sie od wpisanego ciagu
                 podpowiedz.clear();
@@ -75,9 +80,14 @@ public class TabPerk implements TabCompleter {
                     }
                }
                return podpowiedz;
+           //++, -- , lub coś innego
+           }else{
+               podpowiedz.clear();
+               return podpowiedz;
            }
         }
-        return null;
+        podpowiedz.clear();
+        return podpowiedz;
     }
 
 }
