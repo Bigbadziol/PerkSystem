@@ -1,14 +1,12 @@
 package badziol.perksystem.perk.KrwawiaceRany;
 
 import badziol.perksystem.PerkSystem;
-import badziol.perksystem.perk.Ikar.PerkIkarData;
 import badziol.perksystem.perk.Perk;
-import net.minecraft.world.entity.EntityLiving;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
@@ -106,12 +104,20 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
                         System.out.println(ofiara.getName()+" dodany do listy krwawiacych.");
 
                     }else{
-                        System.out.println(ofiara.getName()+" juz jest na liscie krwawiacych.");
+                        krd.auktualnyTick = 0;
+                        krwawiacy.put(ofiara.getUniqueId(),krd);
+                        System.out.println(ofiara.getName()+" odnowiono krwawienie");
                         //co robimy z nieszczesnikiem jesli juz krwawi???
                     }
                 }
             }
         }
+    }
+    @EventHandler
+    public void onKrwawiacyGinie(PlayerDeathEvent event) {
+        UUID graczaUid = event.getEntity().getUniqueId();
+        krwawiacy.remove(graczaUid);
+        System.out.println("Wylaczono posmiertne krwawienie");
     }
 
     /**
@@ -130,6 +136,6 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
      */
     @Override
     public  void dezaktywuj(Player gracz){
-        System.out.println("[DEAKTYWACJA](Ikar): "+nazwaId+" - uwaga! deaktywacja -> ZadanieKrwawiaceRany ");
+        System.out.println("[DEAKTYWACJA](Krwawiacy): "+nazwaId+" - uwaga! deaktywacja -> ZadanieKrwawiaceRany ");
     }
 }

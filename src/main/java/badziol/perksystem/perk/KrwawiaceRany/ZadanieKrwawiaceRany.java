@@ -29,7 +29,9 @@ public class ZadanieKrwawiaceRany extends BukkitRunnable {
                     if ((rannyData.ostatniTickCzas + rannyData.tickCzas) < teraz){
                         rannyData.ostatniTickCzas = teraz;
                         rannyData.auktualnyTick++;
- //                       System.out.println(ja.getName()+" tick : "+rannyData.auktualnyTick);
+                        ja.damage(rannyData.tickObrazenie);
+                        System.out.println("zadano obrazenia "+ ja.getName() + "w wysokosci :" + rannyData.tickObrazenie);
+                        System.out.println(ja.getName()+" tick : "+rannyData.auktualnyTick);
                     }
                 }
                 //W tej petli nie mozesz usunac z mapy- patrz : tu operujesz bezposrednio na danych

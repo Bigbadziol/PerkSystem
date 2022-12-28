@@ -44,6 +44,7 @@ versja aktualna - https://modrinth.com/plugin/nbtapi/versions
         </dependency>
  */
 
+//28.12.2022 - dokonczony perk krwawienie
 package badziol.perksystem;
 
 import badziol.perksystem.komendy.TabPerk;
@@ -132,7 +133,7 @@ public final class PerkSystem extends JavaPlugin {
         zadanieIkar.runTaskTimer(this,0L,40L); //co 40 = 2 sek
         //Krwawiace rany
         ZadanieKrwawiaceRany zadanieKrwawiaceRany = new ZadanieKrwawiaceRany(this);
-        zadanieKrwawiaceRany.runTaskTimer(this,0L,10L); //co 40 = 2 sek
+        zadanieKrwawiaceRany.runTaskTimer(this,0L,40L); //co 40 = 2 sek
     }
 
     @Override
