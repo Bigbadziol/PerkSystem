@@ -1,11 +1,12 @@
 package badziol.perksystem.perk;
 
 import badziol.perksystem.PerkSystem;
-import badziol.perksystem.perk.CienzkaLapa.PerkCienzkaLapa;
+import badziol.perksystem.perk.CiezkaLapa.PerkCiezkaLapa;
 import badziol.perksystem.perk.Ikar.PerkIkar;
 import badziol.perksystem.perk.Kevlar.PerkKevlar;
 import badziol.perksystem.perk.KrwawiaceRany.PerkKrwawiaceRany;
 import badziol.perksystem.perk.Niejadek.PerkNiejadek;
+import badziol.perksystem.perk.Nieustawiony.PerkNiesustawiony;
 import badziol.perksystem.perk.Sprinter.PerkSprinter;
 import badziol.perksystem.perk.Wampir.PerkWampir;
 import com.google.gson.Gson;
@@ -35,7 +36,7 @@ public class PerkLista {
         wszystkiePerki.add(new PerkNiejadek(this.plugin));
         wszystkiePerki.add(new PerkSprinter(this.plugin));
         wszystkiePerki.add(new PerkIkar(this.plugin));
-        wszystkiePerki.add(new PerkCienzkaLapa(this.plugin));
+        wszystkiePerki.add(new PerkCiezkaLapa(this.plugin));
         wszystkiePerki.add(new PerkWampir(this.plugin));
         wszystkiePerki.add(new PerkKevlar(this.plugin));
         wszystkiePerki.add(new PerkKrwawiaceRany(this.plugin));

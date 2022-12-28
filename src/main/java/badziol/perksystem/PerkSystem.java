@@ -53,7 +53,7 @@ import badziol.perksystem.komendy.komendaPerk;
 import badziol.perksystem.komendyTestowe.*;
 import badziol.perksystem.listeners.ListenerCzastki;
 import badziol.perksystem.listeners.ListenerMenu;
-import badziol.perksystem.perk.CienzkaLapa.PerkCienzkaLapa;
+import badziol.perksystem.perk.CiezkaLapa.PerkCiezkaLapa;
 import badziol.perksystem.perk.Ikar.ZadanieIkar;
 import badziol.perksystem.perk.Ikar.komendaIkar;
 import badziol.perksystem.perk.Kevlar.PerkKevlar;
@@ -101,6 +101,7 @@ public final class PerkSystem extends JavaPlugin {
         System.out.println("------------------------------------------");
         Objects.requireNonNull(getCommand("perk")).setExecutor(new komendaPerk(this));
         Objects.requireNonNull(getCommand("perk")).setTabCompleter(new TabPerk(this));
+
         Objects.requireNonNull(getCommand("pg")).setExecutor(new komendaPG(this));
         Objects.requireNonNull(getCommand("ikar")).setExecutor(new komendaIkar(this));
 
@@ -132,7 +133,7 @@ public final class PerkSystem extends JavaPlugin {
         //LISTENERY
         getServer().getPluginManager().registerEvents(new ListenerMenu(this), this);
         getServer().getPluginManager().registerEvents(new PerkNiejadek(this),this);
-        getServer().getPluginManager().registerEvents(new PerkCienzkaLapa(this),this);
+        getServer().getPluginManager().registerEvents(new PerkCiezkaLapa(this),this);
         getServer().getPluginManager().registerEvents(new PerkWampir(this),this);
         getServer().getPluginManager().registerEvents(new PerkKevlar(this),this);
         //...

@@ -2,6 +2,7 @@ package badziol.perksystem.perk.Ikar;
 
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
@@ -19,10 +20,10 @@ public class PerkIkar extends Perk implements Listener{
      */
     public PerkIkar(PerkSystem plugin) {
         super(plugin); //wywolaj konstruktor nadrzędny
-        nazwaId="ikar";
+        nazwaId= PerkStale.PERK_IKAR;
+        wyswietlanie="Ikar";
         opis.add("Od tej chwili zyskujesz mozliwosc");
         opis.add("krotkotrwalego latania");
-        wyswietlanie="Ikar";
         //https://minecraft-heads.com/custom-heads/animals/25787-fly
         textura="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3J"+
                 "hZnQubmV0L3RleHR1cmUvMTVmZjkyNGY3YjQ0NGYzOTE2MmJhZDMwMWZkYzE3Nzk3Yz"+

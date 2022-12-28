@@ -1,16 +1,18 @@
-package badziol.perksystem.perk.CienzkaLapa;
+package badziol.perksystem.perk.CiezkaLapa;
 
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class PerkCienzkaLapa extends Perk implements Listener {
-    public PerkCienzkaLapa(PerkSystem plugin) {
+
+public class PerkCiezkaLapa extends Perk implements Listener {
+    public PerkCiezkaLapa(PerkSystem plugin) {
         super(plugin);
-        nazwaId="cienzkalapa";
+        nazwaId= PerkStale.PERK_CIEZKA_LAPA;
         wyswietlanie="Ciężka Łapa";
         opis.add("Pudzian przy tobie to");
         opis.add("chlopiec do bicia");

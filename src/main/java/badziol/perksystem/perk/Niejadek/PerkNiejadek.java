@@ -2,6 +2,7 @@ package badziol.perksystem.perk.Niejadek;
 
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -14,7 +15,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 public class PerkNiejadek extends Perk implements Listener {
     public PerkNiejadek(PerkSystem plugin) {
         super(plugin);
-        nazwaId="niejadek";
+        nazwaId= PerkStale.PERK_NIEJADEK;
         opis.add("Nie odczuwasz glodu.");
         opis.add("Wystarczy ci energia kosmosu");
         wyswietlanie="Niejadek!";
@@ -29,14 +30,11 @@ public class PerkNiejadek extends Perk implements Listener {
     public void onFoodChange(FoodLevelChangeEvent e) {
         if (e.getEntityType () != EntityType.PLAYER) return;
         Player glodnyGracz = (Player) e.getEntity();
-        int glod = glodnyGracz.getFoodLevel();
-        Bukkit.getServer().broadcastMessage("Era glodu "+glodnyGracz.getName()+" int:"+glod);
-        System.out.println("Era glodu "+glodnyGracz.getName()+" int:"+glod);
+
         if (plugin.perkLista.czyPosiadaAktywny(glodnyGracz.getName(),nazwaId)){
             glodnyGracz.sendMessage("Zasales porcje energii z kosomosu.");
-            System.out.println("[Niejadek] zadzialal (ev)onFoodChange");
+            System.out.println("[Niejadek] zadzialal na "+glodnyGracz.getName());
             e.setCancelled(true);
         }
-        //e.setCancelled(true);//nie tu - zostawic dla potomnosci
     }
 }

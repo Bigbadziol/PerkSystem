@@ -2,6 +2,7 @@ package badziol.perksystem.perk.KrwawiaceRany;
 
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,9 +12,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 import java.util.UUID;
-
-
-
 
 /*
     Bardzo wazne !!
@@ -28,12 +26,12 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
 
     public PerkKrwawiaceRany(PerkSystem plugin) {
         super(plugin);
-        nazwaId = "krwawiacerany";
-        wyswietlanie = "Krwąwiace rany";
+        nazwaId = PerkStale.PERK_KRWAWIACE_RANY;
+        wyswietlanie = "Krwawiące rany";
         opis.add("Dość nie etyczna zabawa ta,");
-        opis.add("ludzi wykrwawiasz kożdego dnia");
+        opis.add("ludzi wykrwawiasz każdego dnia");
         opis.add("");
-        opis.add("Twoji przeciwnicy wykrwawiają sie prez 2s");
+        opis.add("Twoji przeciwnicy wykrwawiają sie przez 2s");
         opis.add("o 30% zadanych obrażeń. Jedynie kiedy");
         opis.add("zostały zadane crytikalsem");
         textura = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3J" +
@@ -42,9 +40,7 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
         inicjujGlowke();
     }
 
-    public int getSize(){
-        return krwawiacy.size();
-    }
+
     public PerkKrwawiaceRanyData pobierzKrwawiacego(UUID uuid){
         return krwawiacy.get(uuid);
     }
@@ -52,7 +48,7 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
     public void onCiosKrwawienie(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player ofiara) {
             double finalDamage = event.getFinalDamage();
-            double damage = event.getDamage();// uzyweane w debugu NIE RUSZAC
+            double damage = event.getDamage();// używane w debugu NIE RUSZAĆ
 
             if (event.getDamager() instanceof Player atakujacy) {
                 if (plugin.perkLista.czyPosiadaAktywny(atakujacy.getName(), nazwaId)) {

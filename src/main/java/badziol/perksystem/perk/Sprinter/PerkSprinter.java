@@ -5,11 +5,13 @@ import badziol.perksystem.perk.Perk;
 import badziol.perksystem.perk.PerkStale;
 import org.bukkit.entity.Player;
 
-//5) zwirkszona predkosc biegania o 15%
+/**
+ * Perk zwiększa szybkość chodzenia
+ */
 public class PerkSprinter extends Perk {
     public  PerkSprinter(PerkSystem plugin){
         super(plugin);
-        nazwaId="sprinter";
+        nazwaId=PerkStale.PERK_SPRINTER;
         wyswietlanie="Sprinter!";
         opis.add("Jestes szybszy niz...");
         opis.add("emeryt na promocji karkowki.");
@@ -18,12 +20,6 @@ public class PerkSprinter extends Perk {
                 "QzN2QyZmNhYjY5YzMyNzM0ZDM3OWI2NTZhZjE1ZiJ9fX0=";
         inicjujGlowke();
     }
-/*
-    public void run(){
-        PotionEffect potion = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false);
-    }
-
- */
 
     @Override
     public void aktywuj(Player gracz) {

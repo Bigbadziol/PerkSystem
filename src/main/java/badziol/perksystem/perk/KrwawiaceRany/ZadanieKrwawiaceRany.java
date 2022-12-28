@@ -1,12 +1,10 @@
 package badziol.perksystem.perk.KrwawiaceRany;
 
 import badziol.perksystem.PerkSystem;
-
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import static badziol.perksystem.PerkSystem.getPlugin;
 
 public class ZadanieKrwawiaceRany extends BukkitRunnable {
     private PerkSystem plugin;
@@ -14,7 +12,7 @@ public class ZadanieKrwawiaceRany extends BukkitRunnable {
 
     public ZadanieKrwawiaceRany(PerkSystem plugin) {
         this.plugin = plugin;
-        zadanie = (PerkKrwawiaceRany) plugin.perkLista.wezPerk("krwawiacerany");
+        zadanie = (PerkKrwawiaceRany) plugin.perkLista.wezPerk(PerkStale.PERK_KRWAWIACE_RANY);
     }
 
     @Override

@@ -1,14 +1,16 @@
-package badziol.perksystem.perk;
+package badziol.perksystem.perk.Nieustawiony;
 //Specjalny perk , kiedy gracz ma limit np. 4 perkow a ustawione 3
 //-odpcja na ustawienie , lub wylaczenie dzialania perka
 
 
 import badziol.perksystem.PerkSystem;
+import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 
-public class PerkNiesustawiony extends Perk{
+public class PerkNiesustawiony extends Perk {
     public PerkNiesustawiony(PerkSystem plugin){
         super(plugin);
-        nazwaId=PerkStale.PERK_NIEUSTAWIONY;
+        nazwaId= PerkStale.PERK_NIEUSTAWIONY;
         wyswietlanie="Ustaw mnie.";
         opis.add("Wlaczony perk w istotny sposob ");
         opis.add("wzmacnia twoja postac");

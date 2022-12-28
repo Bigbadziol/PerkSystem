@@ -1,0 +1,6 @@
+/*
+    public void run(){
+        PotionEffect potion = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, false);
+    }
+
+ */

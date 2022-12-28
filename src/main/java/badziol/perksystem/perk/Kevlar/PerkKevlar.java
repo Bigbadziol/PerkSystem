@@ -2,6 +2,7 @@ package badziol.perksystem.perk.Kevlar;
 
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
@@ -19,7 +20,7 @@ public class PerkKevlar extends Perk implements Listener {
     public final HashMap<UUID, PerkKevlarData> opancezeni = new HashMap<>();
     public  PerkKevlar(PerkSystem plugin){
         super(plugin);
-        nazwaId="kevlar";
+        nazwaId= PerkStale.PERK_KEVLAR;
         wyswietlanie="Kevlar";
         opis.add("Najlepszą obroną jest zbroja");
         opis.add(", dlatego warto ją posiadać");

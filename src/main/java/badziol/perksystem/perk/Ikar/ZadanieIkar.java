@@ -1,6 +1,7 @@
 package badziol.perksystem.perk.Ikar;
 
 import badziol.perksystem.PerkSystem;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -12,12 +13,12 @@ public class ZadanieIkar extends BukkitRunnable {
 
     public ZadanieIkar(PerkSystem plugin) {
         this.plugin = plugin;
-        zadanie = (PerkIkar)plugin.perkLista.wezPerk("ikar");
+        zadanie = (PerkIkar)plugin.perkLista.wezPerk(PerkStale.PERK_IKAR);
     }
     @Override
     public void run() {
 //        System.out.println("Ikar kontroler :"+zadanie.ikarzy.size());
-        zadanie.ikarzy.forEach((key, ikarData) -> { //NIE ROB returnow , breakow czy continue w tego typu pentli!!
+        zadanie.ikarzy.forEach((key, ikarData) -> { //NIE ROB returnów, breaków czy continue w tego typu pętli!!
             Player ja = Bukkit.getPlayer(key);
             if (ja != null) {
                 if (!ja.isOnline()){

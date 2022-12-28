@@ -1,7 +1,7 @@
 package badziol.perksystem.perk.Ikar;
 
 import badziol.perksystem.PerkSystem;
-import badziol.perksystem.perk.Ikar.PerkIkar;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,9 +18,9 @@ public class komendaIkar implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player gracz = (Player) sender;
-            boolean maPerka = plugin.perkLista.czyPosiadaAktywny(gracz.getName(),"ikar");
+            boolean maPerka = plugin.perkLista.czyPosiadaAktywny(gracz.getName(), PerkStale.PERK_IKAR);
             if (maPerka){
-                PerkIkar perkIkar = (PerkIkar)plugin.perkLista.wezPerk("ikar");
+                PerkIkar perkIkar = (PerkIkar)plugin.perkLista.wezPerk(PerkStale.PERK_IKAR);
                 perkIkar.aktywuj(gracz);
             }else{
                 System.out.println("[Ikar](komenda) - "+gracz.getName()+" nie ma aktywnego perka.");

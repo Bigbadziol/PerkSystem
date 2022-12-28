@@ -1,12 +1,9 @@
 package badziol.perksystem.komendy;
 
 import badziol.perksystem.PerkSystem;
-import badziol.perksystem.perk.Perk;
 import badziol.perksystem.perk.PerkStale;
 import badziol.perksystem.perk.PosiadaczPerkow;
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -142,7 +139,6 @@ public class komendaPerk implements CommandExecutor {
                 akcja = args[1];
                 nazwaPerka = args[2];
 
-                //TODO : ten sam kod czy gracz istnieje w wersji dla 2 i 3 parametrow
                 Player gracz = Bukkit.getServer().getPlayerExact(imieGracza); //to zwraca gracza online?
                 if(gracz == null){
                     p.sendMessage("Nie odnaleziono gracza.");
@@ -201,35 +197,9 @@ public class komendaPerk implements CommandExecutor {
             if (args.length ==1){
                 if (args[0].equalsIgnoreCase("debug")){
                     System.out.println("-----MAIN DEBUG ----");
-                    PosiadaczPerkow gracz = plugin.perkLista.pobierzPosiadacza("filipppos");
-                    if (gracz != null){
-                        gracz.ustawPerkAktywny(-1,"sprinter");
-                        gracz.ustawPerkAktywny(0,"silacz");
-                        gracz.ustawPerkAktywny(1,"wampir");
-                        gracz.ustawPerkAktywny(2,"niejadek");
-                        gracz.ustawPerkAktywny(3,"sprinter");
-                        gracz.ustawPerkAktywny(4,"zycie");
-                        gracz.ustawPerkAktywny(5,"niejadek");
-                        System.out.println(gracz.wypisz());
-                    }else{
-                        System.out.println("Gracz nie znaleziony.");
-                    }
-
                 }
                 else if (args[0].equalsIgnoreCase("debug2")){
                     System.out.println("-----HELP DEBUG 2 ----");
-                    PosiadaczPerkow graczPosiadacz = plugin.perkLista.pobierzPosiadacza("filipppos");
-                    Player gracz = Bukkit.getPlayerExact("filipppos");
-                    double zdrowie = gracz.getHealth();
-                    AttributeInstance maxZdrowieGra = gracz.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                    maxZdrowieGra.getDefaultValue();
-                    System.out.println("FILIP -> zdrowie :"+zdrowie+" maxZdrowie : "+maxZdrowieGra.getDefaultValue());
-                    int nazarcie = gracz.getFoodLevel();
-                    double maxNazarcie = 20;
-                    System.out.println("FILIP -> jedzenie :"+nazarcie+" maxJedzenie : "+maxNazarcie);
-
-
-                    System.out.println(graczPosiadacz.wypisz());
                 }
                 else{
                     System.out.println("Konsola - cos nie tak z parametrami");

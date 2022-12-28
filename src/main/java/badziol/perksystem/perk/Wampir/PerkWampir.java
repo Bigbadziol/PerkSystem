@@ -2,6 +2,7 @@ package badziol.perksystem.perk.Wampir;
 
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -14,7 +15,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class PerkWampir extends Perk implements Listener {
     public PerkWampir(PerkSystem plugin) {
         super(plugin);
-        nazwaId="wampir";
+        nazwaId= PerkStale.PERK_WAMPIR;
         wyswietlanie="Wampir";
         opis.add("Nie możesz się doczekać smaku");
         opis.add("krwi przeciwnika.");
