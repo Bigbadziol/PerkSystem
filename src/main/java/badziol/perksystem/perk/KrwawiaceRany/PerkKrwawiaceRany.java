@@ -37,6 +37,7 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
         textura = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3J" +
                 "ZnQubmV0L3RleHR1cmUvOTNhMzk2MGM4Nzk0NzQwMTdjMGNhM2M4MGY2ZWU3M2NmODg2ZTAwZTg5" +
                 "YzkwMmEzZWU4OTNkZDI4NDk1MzVjMCJ9fX0=";
+        efektWidoczny = true;
         inicjujGlowke();
     }
 

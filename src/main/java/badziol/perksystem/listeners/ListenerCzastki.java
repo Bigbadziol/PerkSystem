@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Random;
+
 public class ListenerCzastki  implements Listener {
 
     @EventHandler
@@ -28,10 +30,12 @@ public class ListenerCzastki  implements Listener {
 
         //kierunkowe 1
         //zielony falujacy waz od stop
-        gracz.getWorld().spawnParticle(Particle.TOTEM,gracz.getLocation(),0,2,2,2);
+//        gracz.getWorld().spawnParticle(Particle.TOTEM,gracz.getLocation(),0,2,2,2);
 
         // kierunkowe 2 - dla sprintera ????
-        //gracz.spawnParticle(Particle.SMOKE_NORMAL,gracz.getLocation(),0,0.5d,0.5d,0.5d);
+        //Location pozycjaEfektu = gracz.getLocation();
+        //pozycjaEfektu.setY(pozycjaEfektu.getY() + 0.5d);
+        //gracz.spawnParticle(Particle.BUBBLE_COLUMN_UP,gracz.getLocation(),20,0.5d,1.5d,0.5d);
 
 
 
@@ -87,7 +91,12 @@ public class ListenerCzastki  implements Listener {
         Vibration vibration = new Vibration(gracz.getLocation(), new Vibration.Destination.BlockDestination(cel.getLocation()), 40);
        // gracz.getWorld().spawnParticle(Particle.VIBRATION, gracz.getLocation(), 1, vibration);
         gracz.getWorld().spawnParticle(Particle.SHRIEK, gracz.getLocation(), 1,40);
+
 */
+        //Pomysl na ikara - aktywacja perka lub lot
+        //Location pozycjaEfektu = gracz.getLocation();
+        //pozycjaEfektu.setY(pozycjaEfektu.getY() + 0.5d);
+        //gracz.spawnParticle(Particle.BUBBLE_COLUMN_UP,gracz.getLocation(),20,0.5d,1.5d,0.5d);
     }
 
 }

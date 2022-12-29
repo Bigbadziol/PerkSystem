@@ -14,6 +14,8 @@ public class PerkIkarData {
     public long lotRozpoczecie = 0L; //czas ms od ostatniego uruchomienia komendy
     public boolean wyswietlonoOstrzezenie = false; //czy wyświetlono ostrzeżenie o przekroczeniu bezpiecznego czasu lotu
 
+    public final int glodTick = 3; //co ile sekund lotu gracz glodnieje
+    public long glodTickCzas = 0l; // ostatni czas w ms, kiedy gracz zgłodniał podczas lotu
     public boolean aktywny = false; // czy w danej chwili perk działa na rzecz konkretnego gracza
 
 }

@@ -5,11 +5,15 @@ import badziol.perksystem.perk.PerkStale;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class komendaIkar implements CommandExecutor {
-    private final PerkSystem plugin;
+import java.util.ArrayList;
+import java.util.List;
 
+public class komendaIkar implements TabExecutor {
+    private final PerkSystem plugin;
+    private final ArrayList<String> pustaLista = new ArrayList<>();
     public komendaIkar(PerkSystem plugin) {
         this.plugin = plugin;
     }
@@ -28,5 +32,10 @@ public class komendaIkar implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        return pustaLista;
     }
 }

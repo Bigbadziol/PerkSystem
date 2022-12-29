@@ -25,6 +25,7 @@ public abstract class Perk {
     public ArrayList<String> opis = new ArrayList<>();
     public long czasAktywnosci = 0; //bo domyslnie pasywny
     public String textura="";
+    public boolean efektWidoczny = false; //efekt w postaci czastek ma byc nalozony
 
     public Perk(PerkSystem plugin){
         this.plugin = plugin;

@@ -143,10 +143,10 @@ public final class PerkSystem extends JavaPlugin {
         //ZADANIA
         //Ikar
         ZadanieIkar zadanieIkar = new ZadanieIkar(this);
-        zadanieIkar.runTaskTimer(this,0L,40L); //co 40 = 2 sek
+        zadanieIkar.runTaskTimer(this,0L,20L); //co 40 = 2 sek
         //Krwawiace rany
         ZadanieKrwawiaceRany zadanieKrwawiaceRany = new ZadanieKrwawiaceRany(this);
-        zadanieKrwawiaceRany.runTaskTimer(this,0L,40L); //co 40 = 2 sek
+        zadanieKrwawiaceRany.runTaskTimer(this,0L,20L); //co 40 = 2 sek
     }
 
     @Override

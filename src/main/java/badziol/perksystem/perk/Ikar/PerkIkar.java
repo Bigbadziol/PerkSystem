@@ -28,6 +28,7 @@ public class PerkIkar extends Perk implements Listener{
         textura="eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3J"+
                 "hZnQubmV0L3RleHR1cmUvMTVmZjkyNGY3YjQ0NGYzOTE2MmJhZDMwMWZkYzE3Nzk3Yz"+
                 "YxNmUxODcxZGRmODJjYTdmMWQyMzFhNTczOTRlIn19fQ==";
+        efektWidoczny = true;
         inicjujGlowke();
     }
 
