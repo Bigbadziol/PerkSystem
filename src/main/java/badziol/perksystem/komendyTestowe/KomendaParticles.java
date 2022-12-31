@@ -4,17 +4,16 @@ import badziol.perksystem.PerkSystem;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class komendaParticles implements CommandExecutor {
+public class KomendaParticles implements CommandExecutor {
     private final PerkSystem plugin;
 
-    public komendaParticles(PerkSystem plugin) {
+    public KomendaParticles(PerkSystem plugin) {
         this.plugin = plugin;
     }
 
@@ -69,6 +68,10 @@ public class komendaParticles implements CommandExecutor {
                         System.out.println("[Czastki] - wybor 6 offset");
                         //player.getWorld().spawnParticle(Particle.FALLING_LAVA,50,0,10,25);
                         player.spawnParticle(Particle.FALLING_LAVA, player.getLocation(),25,0,10,0);
+                    }
+                    case 7->{
+                        //Particle.DustOptions dust = new Particle.DustOptions(Color.fromRGB(255,255,0),1.5f);
+                        player.getWorld().spawnParticle(Particle.WARPED_SPORE,player.getLocation(),500,0,2,3,1000);
                     }
                     case 10->{
                         Location loc = player.getLocation();

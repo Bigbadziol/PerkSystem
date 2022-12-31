@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class komendaLot implements CommandExecutor {
+public class KomendaLot implements CommandExecutor {
     private final ArrayList<Player> listaLotnikow = new ArrayList<>();
     private final PerkSystem plugin;
 
-    public komendaLot(PerkSystem plugin){
+    public KomendaLot(PerkSystem plugin){
         this.plugin = plugin;
     }
     @Override

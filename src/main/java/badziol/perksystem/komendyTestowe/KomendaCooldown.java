@@ -7,12 +7,12 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class komendaCooldown  implements CommandExecutor {
+public class KomendaCooldown implements CommandExecutor {
     //The key is the Player, and the long is the epoch time of the last time they ran the command
     private final HashMap<UUID, Long> mapaCd;
     private final long czas = 5000L;
 
-    public komendaCooldown() {
+    public KomendaCooldown() {
         this.mapaCd = new HashMap<>();
     }
 

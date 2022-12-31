@@ -97,6 +97,10 @@ public class ListenerCzastki  implements Listener {
         //Location pozycjaEfektu = gracz.getLocation();
         //pozycjaEfektu.setY(pozycjaEfektu.getY() + 0.5d);
         //gracz.spawnParticle(Particle.BUBBLE_COLUMN_UP,gracz.getLocation(),20,0.5d,1.5d,0.5d);
+
+
+        //Particle.DustTransition dustTransition = new Particle.DustTransition(Color.fromRGB(255, 0, 0), Color.fromRGB(0, 255, 0), 3.0F);
+        //gracz.spawnParticle(Particle.DUST_COLOR_TRANSITION, gracz.getLocation(), 50, dustTransition);
     }
 
 }

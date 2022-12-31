@@ -6,10 +6,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class komendaPG implements CommandExecutor {
+public class KomendaPG implements CommandExecutor {
     private final PerkSystem plugin; //referencja do naszego glownego pluginu
 
-    public komendaPG(PerkSystem plugin) {
+    public KomendaPG(PerkSystem plugin) {
         this.plugin = plugin;
     }
 

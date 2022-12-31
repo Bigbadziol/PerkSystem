@@ -13,10 +13,10 @@ import org.bukkit.entity.Player;
 import java.io.IOException;
 
 
-public class komendaPerk implements CommandExecutor {
+public class KomendaPerk implements CommandExecutor {
     private final PerkSystem plugin;
 
-    public komendaPerk(PerkSystem plugin){
+    public KomendaPerk(PerkSystem plugin){
         this.plugin = plugin;
     }
 

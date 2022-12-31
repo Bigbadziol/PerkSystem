@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -25,10 +26,17 @@ public abstract class Perk {
     public ArrayList<String> opis = new ArrayList<>();
     public long czasAktywnosci = 0; //bo domyslnie pasywny
     public String textura="";
+
+    protected long efektStartCzas = 0;
+    protected long efektStopCzas = 0;
     public boolean efektWidoczny = false; //efekt w postaci czastek ma byc nalozony
+    public BukkitRunnable efekt;  //?? zdefiniowane w kazdym perku?
+
 
     public Perk(PerkSystem plugin){
+
         this.plugin = plugin;
+
     }
 
     /**
@@ -83,6 +91,18 @@ public abstract class Perk {
         return glowka;
     }
 
+    public void uruchomEfekt(long czas){
+        if (efekt != null){
+            if (czas==0){
+                efekt.runTaskTimer(plugin,0L,10L);
+            }else{
+
+            }
+        }
+    }
+    public void zatrzymajEfekt(){
+        if (efekt != null) efekt.cancel();
+    }
 
     public void aktywuj(Player gracz){
         System.out.println("[AKTYWACJA]: "+nazwaId+" [template].");

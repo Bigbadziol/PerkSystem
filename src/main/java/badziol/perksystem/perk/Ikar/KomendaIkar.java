@@ -3,7 +3,6 @@ package badziol.perksystem.perk.Ikar;
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.PerkStale;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
@@ -11,10 +10,10 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class komendaIkar implements TabExecutor {
+public class KomendaIkar implements TabExecutor {
     private final PerkSystem plugin;
     private final ArrayList<String> pustaLista = new ArrayList<>();
-    public komendaIkar(PerkSystem plugin) {
+    public KomendaIkar(PerkSystem plugin) {
         this.plugin = plugin;
     }
 

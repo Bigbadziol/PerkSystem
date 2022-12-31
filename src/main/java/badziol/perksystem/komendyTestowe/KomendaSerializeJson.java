@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
-public class komendaSerializeJson implements CommandExecutor {
+public class KomendaSerializeJson implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 

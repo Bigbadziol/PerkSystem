@@ -1,6 +1,5 @@
 package badziol.perksystem.komendyTestowe;
 
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,7 +10,7 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import static badziol.perksystem.perk.PerkStale.INSTRUKCJA_TRESC;
 
-public class komendaKsiazka  implements CommandExecutor {
+public class KomendaKsiazka implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {

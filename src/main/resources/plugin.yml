@@ -39,3 +39,6 @@ commands:
   par:
     description: Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
     usage: </command>
+  treser:
+    description: Komenda testowa (robocza) dla perka obslugujacego przyzwanca
+    usage: </command>

@@ -1,0 +1,43 @@
+Generatory mobow :
+https://www.digminecraft.com/generators/summon_mob.php
+(fajniejsza) https://www.gamergeeks.net/apps/minecraft/mob-generator
+
+Dodawanie wilka:
+/summon minecraft:wolf  - bazowe do przywoływania wszystkich bytów (entity)
+
+Oswajanie wilka -> pies
+(na ten moment nie istotne)
+
+Zmiana atrybutow:
+
+Uzbrajnie wilka:
+
+
+Obsluga wilka ??
+
+
+Istotne do konfiguracji :
+-damage , ale jako liczba , nie modyfikatory z przedmiotow
+-hp
+- armor
+- odporność na knockback/resistance
+
+Pies pojawia sie od razu.
+Automatyczne odradzanie sie psa po przykladowo 30 sekundach.
+Pomyśleć o zablokowaniu możliwości karmienia psa, bo karmienie odnawia hp.
+Niech pies się świeci.
+Zakladamy , że jest tylko 1 pies.
+Posiadanie innych zwierząt bojowych nie blokuje perka.
+Nametag nawiązujący do faktycznego posiadacza psa.
+//---------------------------------------------------------------------------------
+Użyteczny pies wg filipa:
+
+Komenda do zabicia przyzwańca :
+
+
+
+
+
+/kill @e[type=minecraft:wolf,name=burek]
+/summon minecraft:wolf ~ ~1 ~ {CollarColor:15,CustomName:'[{"text":"burek"}]',CustomNameVisible:1b,Health:10,ActiveEffects:[{Id:10,Duration:99999999,Amplifier:1,ShowParticles:0b}],Owner:[I;0],HandItems:[{},{id:diamond_helmet,Count:1}],Attributes:[{Name:"generic.max_health",Base:40f},{Name:"generic.knockback_resistance",Base:0.4f}],HandDropChances:[0f,0f]}
+
