@@ -1,0 +1,8 @@
+//https://hub.spigotmc.org/javadocs/spigot/org/bukkit/attribute/Attribute.html
+
+        /*
+        AttributeModifier mod = new AttributeModifier("generic.attackDamage",2, AttributeModifier.Operation.ADD_NUMBER);
+
+        AttributeModifier mod2 = new AttributeModifier("generic.attackDamage",2,
+                AttributeModifier.Operation.ADD_NUMBER);
+        */

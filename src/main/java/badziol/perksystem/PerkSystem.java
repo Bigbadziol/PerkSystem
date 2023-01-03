@@ -61,7 +61,7 @@ import badziol.perksystem.perk.KrwawiaceRany.PerkKrwawiaceRany;
 import badziol.perksystem.perk.KrwawiaceRany.ZadanieKrwawiaceRany;
 import badziol.perksystem.perk.Niejadek.PerkNiejadek;
 import badziol.perksystem.perk.PerkLista;
-import badziol.perksystem.perk.Treser.KomendaTreser;
+import badziol.perksystem.perk.Treser.PerkTreser;
 import badziol.perksystem.perk.Wampir.PerkWampir;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -105,7 +105,6 @@ public final class PerkSystem extends JavaPlugin {
 
         Objects.requireNonNull(getCommand("pg")).setExecutor(new KomendaPG(this));
         Objects.requireNonNull(getCommand("ikar")).setExecutor(new KomendaIkar(this));
-        Objects.requireNonNull(getCommand("treser")).setExecutor(new KomendaTreser(this));
 
 
         Objects.requireNonNull(getCommand("ser64")).setExecutor(new KomendaSerializeBase64());
@@ -149,6 +148,9 @@ public final class PerkSystem extends JavaPlugin {
         //Krwawiace rany
         ZadanieKrwawiaceRany zadanieKrwawiaceRany = new ZadanieKrwawiaceRany(this);
         zadanieKrwawiaceRany.runTaskTimer(this,0L,20L); //co 40 = 2 sek
+
+
+        getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
     }
 
     @Override
