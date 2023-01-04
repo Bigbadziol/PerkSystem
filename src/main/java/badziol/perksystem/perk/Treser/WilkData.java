@@ -10,13 +10,14 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 
-import java.util.UUID;
+import java.util.Objects;
 
 public class WilkData {
-    private final Wolf wilk; //realny minecraftowy wilk
-    private final Player wlasciciel; //by mieć dostęp do pewnych danych na skróty
+    private  Wolf wilk; //realny minecraftowy wilk ukryty w naszym obiekcie
+    private  Player wlasciciel; //by mieć dostęp do pewnych danych na skróty
 
-    private final int czasRespawn = 30; //Po śmierci psa ten się odrodzi po tym czasie automatycznie. Czas w sekundach.
+    public final int czasRespawn = 30; //Po śmierci psa ten się odrodzi po tym czasie automatycznie. Czas w sekundach.
+    public final int czasRegeneracja = 10; //Po jakim czasie wilk odzyska 1 punkt hp. Czas w sekundach.
     private final int hpBazowe = 25; // maxymalne hp naszego wilka, domyślna: 20
     public final double poziomRan =0.5d; // 0.5 , oznacza,że poniżej 50% maksymalnego życia wilk jest bardziej
     // niebezpieczny i zyskuje możliwość zadawania krytycznych obrażeń
@@ -25,21 +26,25 @@ public class WilkData {
     private final double knockbackRes = 1.0d; //odrzut na cios , domyślna : 0.0
     private final double szybkosc = 0.75d; // szybkosc poruszania sie naszego przyzwanca, domyślna 0.7
 
-    public long czasSmierci = 0l; //zapamiętany czas ostatniej śmierci wilka
+    public long czasSmierci = 0L; //zapamiętany czas ostatniej śmierci wilka
     public boolean zyje = true; // aktualny stan
     public boolean pierwszePrzyzwanie = true; //???? chodzi o glitcha z odnawianiem hp
     public double hpOstatnie = hpBazowe; // wstępna inicjalizacja.
 
+    public long czasOstatniaRegeneracja = 0;// Czas ostatniego przyrostu punktu hp;
 
-    public UUID wilkUniqueId(){
-        return wilk.getUniqueId();
-    }
 
-    public UUID wlascicielUniqueId(){
-        return wilk.getOwner().getUniqueId();
-    }
-
-    public WilkData(Player wlascicielWilka){
+    /**
+     * Metoda tworzy obiekt (minecraftowe entity) wilka nadając mu zdefiniowane cechy.
+     * @param wlascicielWilka - gracz, któremu ma zostać przypisany wilk bojowy
+     * @return false- kiedy wilk istnieje (nie jest nullem). <br>
+     * true - nie napodkano  problemów.
+     */
+    private boolean utworzWilka(Player wlascicielWilka){
+        if (wilk != null){
+            System.out.println("[Wilk](utworz) - ten wilk juz istnieje.");
+            return false;
+        }
         this.wlasciciel = wlascicielWilka;
         Location loc = wlasciciel.getLocation();
         wilk = (Wolf) wlasciciel.getWorld().spawnEntity(loc,EntityType.WOLF,false);
@@ -51,6 +56,7 @@ public class WilkData {
         wilk.setCustomNameVisible(true);
         wilk.setGlowing(true);
         wilk.setCollarColor(DyeColor.LIME);
+        wilk.setBreed(false); //nie może się rozmnażać
 
         //Nowe atrybuty wilka
         //https://hub.spigotmc.org/javadocs/spigot/org/bukkit/attribute/Attribute.html
@@ -75,20 +81,75 @@ public class WilkData {
         if (wilkKnockRes != null) wilkKnockRes.setBaseValue(knockbackRes);
 
         pierwszePrzyzwanie = false;
+        czasSmierci = 0L;
+        czasOstatniaRegeneracja = System.currentTimeMillis();
 
+        System.out.println("[Wilk](utworz)- utworzono nowego wilka.");
+        return true;
+    }
+    public WilkData(Player wlascicielWilka){
+        utworzWilka(wlascicielWilka);
     }
 
     public void odwolaj(){
         hpOstatnie = wilk.getHealth();
         wilk.remove();
+        wilk = null;
         System.out.println("[Wilk] - nastapilo odwolanie wilka");
     }
 
     public void atakuj(Player player){
-        System.out.println("[Wilk] - wlasciciel:"+wilk.getOwner().getName()+" --> "+player.getName());
+        System.out.println("[Wilk] - wlasciciel:"+
+                Objects.requireNonNull(wilk.getOwner()).getName()+
+                " --> "+player.getName());
         wilk.attack(player);
     }
 
+
+    /**
+     * Metoda "odtwarza" martwego wilka. Metoda dedykowana zadaniu obsługującemu wilki bojowe.<br>
+     * Następuje wywołanie metody utworzWilka (metoda prywatna)
+     * @return false- nie został wcześniej zdefiniowany właściciel lub wilk aktualnie żyje.<br>
+     * true/false- w zależności od wyniku utworzWilka(gracz)
+     */
+    public boolean respawnWilka(){
+        if (wlasciciel == null){
+            System.out.println("[Wilk] - brak wskazanego wlasciciela.");
+            return false;
+        }
+        if (zyje) return false;
+        if (czasSmierci + czasRespawn* 1000 < System.currentTimeMillis()) return false;
+        return utworzWilka(wlasciciel);
+    };
+
+    /**
+     * Metoda przywraca istniejącemu wilkowi 1 punkt życia co określoną jednostkę czasu.
+     * @return false- wilk jako (byt) nie istnieje, nie upłynął minimalny czas potrzebny na regenerację.<br>
+     * true- odnowiono punkt życia lub wilk jest pełen sił
+     */
+    public boolean regenerujHp(){
+        if (wilk == null) {
+            System.out.println("[Wilk] - regeneracja , wilk jest nullem!");
+            return false;
+        }
+        //najpierw sprawdzamy czas
+        if (czasOstatniaRegeneracja + czasRegeneracja*1000 > System.currentTimeMillis()){
+            AttributeInstance wilkMaxHp = wilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+            assert wilkMaxHp != null;
+            if (wilk.getHealth()+1 <= wilkMaxHp.getValue()){
+                wilk.setHealth(wilk.getHealth()+1);
+                System.out.println("[Wilk] - uleczono o 1");
+            }else{
+                wilk.setHealth(wilkMaxHp.getValue());
+                System.out.println("[Wilk] - w pelni sil.");
+            }
+            return true;
+        }else return false;
+    }
+
+    /**
+     * Jak nazwa wskazuje, metoda do wyświetlania informacji pośrednich na temat tej klasy.
+     */
     public void debugInfo(){
     /*
         //chcemy sie dowiedziec jakie bazowe wartosci ma wilk interesujacych nas parametrów

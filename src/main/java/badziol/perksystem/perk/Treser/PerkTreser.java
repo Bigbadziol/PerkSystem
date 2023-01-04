@@ -18,8 +18,8 @@ import java.util.Random;
 import java.util.UUID;
 
 public class PerkTreser extends Perk implements Listener {
-    //Uwaga! klucz- uuid gracza , dane konkretnego wilka
-    private HashMap<UUID, WilkData> wilkiBojowe = new HashMap<>();
+    //Uwaga! klucz- uuid gracza, dane konkretnego wilka
+    public HashMap<UUID, WilkData> wilkiBojowe = new HashMap<>();
     public PerkTreser(PerkSystem plugin) {
         super(plugin);
         nazwaId= PerkStale.PERK_TRESER;
@@ -32,8 +32,6 @@ public class PerkTreser extends Perk implements Listener {
         efektWidoczny = true;
         inicjujGlowke();
     }
-
-
 
     /**
      * Atak wilka, sposob działania.

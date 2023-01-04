@@ -62,6 +62,7 @@ import badziol.perksystem.perk.KrwawiaceRany.ZadanieKrwawiaceRany;
 import badziol.perksystem.perk.Niejadek.PerkNiejadek;
 import badziol.perksystem.perk.PerkLista;
 import badziol.perksystem.perk.Treser.PerkTreser;
+import badziol.perksystem.perk.Treser.ZadanieTreser;
 import badziol.perksystem.perk.Wampir.PerkWampir;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -83,7 +84,7 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.23");
+        System.out.println("(PerkSystem) wersja : 1.33");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
@@ -137,10 +138,11 @@ public final class PerkSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PerkCiezkaLapa(this),this);
         getServer().getPluginManager().registerEvents(new PerkWampir(this),this);
         getServer().getPluginManager().registerEvents(new PerkKevlar(this),this);
-        //...
         getServer().getPluginManager().registerEvents(new PerkKrwawiaceRany(this), this);
+        getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
         //zabawa czastkami
         getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
+
         //ZADANIA
         //Ikar
         ZadanieIkar zadanieIkar = new ZadanieIkar(this);
@@ -148,6 +150,9 @@ public final class PerkSystem extends JavaPlugin {
         //Krwawiace rany
         ZadanieKrwawiaceRany zadanieKrwawiaceRany = new ZadanieKrwawiaceRany(this);
         zadanieKrwawiaceRany.runTaskTimer(this,0L,20L); //co 40 = 2 sek
+        //Treser
+        ZadanieTreser zadanieTreser = new ZadanieTreser(this);
+        zadanieTreser.runTaskTimer(this,0L,20L);
 
 
         getServer().getPluginManager().registerEvents(new PerkTreser(this),this);

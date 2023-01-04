@@ -8,6 +8,7 @@ import badziol.perksystem.perk.KrwawiaceRany.PerkKrwawiaceRany;
 import badziol.perksystem.perk.Niejadek.PerkNiejadek;
 import badziol.perksystem.perk.Nieustawiony.PerkNiesustawiony;
 import badziol.perksystem.perk.Sprinter.PerkSprinter;
+import badziol.perksystem.perk.Treser.PerkTreser;
 import badziol.perksystem.perk.Wampir.PerkWampir;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -40,6 +41,7 @@ public class PerkLista {
         wszystkiePerki.add(new PerkWampir(this.plugin));
         wszystkiePerki.add(new PerkKevlar(this.plugin));
         wszystkiePerki.add(new PerkKrwawiaceRany(this.plugin));
+        wszystkiePerki.add(new PerkTreser(this.plugin));
     }
 
     /**

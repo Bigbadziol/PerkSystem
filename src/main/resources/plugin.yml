@@ -9,36 +9,31 @@ commands:
   perk:
     description: Komenda dla administratora
     usage: </command>
-  prk:
-    description: Testowa wersja z autouzupelnianiem
-    usage: </command>
   ikar:
     description: Uruchomienie Ikara komenda
     usage: </command>
   ser64:
-    description:  Komenda do serializowania przedmiotu w lewej rece metoda base64
+    description: (testy)Komenda do serializowania przedmiotu w lewej rece metoda base64
     usage: </command>
   serjson:
-    description:  Komenda do serializowania przedmiotu w lewej rece json
+    description:  (testy)Komenda do serializowania przedmiotu w lewej rece json
     usage: </command>
   cd:
-    description:  Test cooldownu do dowolnej rzeczy, pod perki
+    description:  (testy)Test cooldownu do dowolnej rzeczy, pod perki
     usage: </command>
   lot:
-    description: Test innego przekazania danych do komendy
+    description: (testy)Test innego przekazania danych do komendy
     usage: </command>
   speed:
-    description: Symulowanie wypicia pota speed
+    description: (testy)Zmiana atrybutow generycznych, szybsze chodzenie
     usage: </command>
   despeed:
-    description: Wylaczenie pota speed
+    description: (testy)Zmiana atrybutow generycznych , powrot do domyslnej wartosci
     usage: </command>
   ksiazka:
-    description: Tworzenie ksiazki z opisem
+    description: (testy)Tworzenie ksiazki z opisem
     usage: </command>
   par:
-    description: Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
+    description: (testy)Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
     usage: </command>
-  treser:
-    description: Komenda testowa (robocza) dla perka obslugujacego przyzwanca
-    usage: </command>
+
