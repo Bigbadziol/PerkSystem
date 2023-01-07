@@ -4,6 +4,7 @@ import badziol.perksystem.PerkSystem;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.tr7zw.changeme.nbtapi.NBT;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -54,6 +55,13 @@ public abstract class Perk {
         System.out.println("[perk.temlate] - init :"+wyswietlanie);
     }
 
+    @SuppressWarnings("deprecation")
+    public ItemStack ustawTexture(ItemStack glowka, String value) {
+        UUID id = UUID.nameUUIDFromBytes(value.getBytes());
+        int less = (int) id.getLeastSignificantBits();
+        int most = (int) id.getMostSignificantBits();
+        return Bukkit.getUnsafe().modifyItemStack(glowka,"{SkullOwner:{Id:[I;" + (less * most) + "," + (less >> 23) + "," + (most / less) + "," + (most * 8731) + "],Properties:{textures:[{Value:\"" + value + "\"}]}}}");
+    }
     /**
      * Fizyczna reprezentacja perka jest glowka gracza klasy Itemstack
      * Dodatkowo metoda "zaszywa" wewnatrz przedmiotu dodatkowe informacje , takie jak :
@@ -64,6 +72,7 @@ public abstract class Perk {
      */
     public ItemStack wezGlowke(){
         //dodaj wlasne ukryte dane
+        //glowka =ustawTexture(glowka,textura);
         NBT.modify(glowka, nbt -> {
             nbt.setString("nazwaId", nazwaId);
             nbt.setLong("czasAktywnosci",czasAktywnosci);
@@ -88,6 +97,7 @@ public abstract class Perk {
         }
         glowka.setItemMeta(meta);
         //zwroc obiekt
+
         return glowka;
     }
 

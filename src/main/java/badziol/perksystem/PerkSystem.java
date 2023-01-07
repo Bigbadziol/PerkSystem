@@ -1,4 +1,4 @@
-
+//07.01.2023 - LAPTOP
 /*
 //dodane - DOSTEP DO : https://www.spigotmc.org/resources/nbt-api.7939/
 <repository>
@@ -84,7 +84,7 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.33");
+        System.out.println("(PerkSystem) wersja : 1.40");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
