@@ -1,4 +1,5 @@
 //07.01.2023 - LAPTOP
+//12.01 - duza zmiana to uskrzydlenie ikara
 /*
 //dodane - DOSTEP DO : https://www.spigotmc.org/resources/nbt-api.7939/
 <repository>
@@ -64,6 +65,7 @@ import badziol.perksystem.perk.PerkLista;
 import badziol.perksystem.perk.Treser.PerkTreser;
 import badziol.perksystem.perk.Treser.ZadanieTreser;
 import badziol.perksystem.perk.Wampir.PerkWampir;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -72,6 +74,7 @@ import java.util.Objects;
 
 
 public final class PerkSystem extends JavaPlugin {
+    private final static String VERSION = Bukkit.getServer().getClass().getPackage().getName().replace("org.bukkit.craftbukkit", "").replace(".", "");
     private static PerkSystem plugin;
     public PerkLista perkLista = new PerkLista(this);
     public PerkGui gui;
@@ -80,11 +83,19 @@ public final class PerkSystem extends JavaPlugin {
         return plugin;
     }
 
+    public static PerkSystem getInstance() {
+        return plugin;
+    }
+
+    public String getServerVersion() {
+        return VERSION;
+    }
     @Override
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.40");
+        System.out.println("(PerkSystem) wersja : 1.47");
+        System.out.println("-Prace nad uskrzydleniem ikara (bezpieczna / niebezpieczna) faza lotu");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
@@ -157,6 +168,7 @@ public final class PerkSystem extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
     }
+
 
     @Override
     public void onDisable() {
