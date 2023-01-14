@@ -119,7 +119,10 @@ public class WilkData {
         }
         if (zyje) return false;
         if (czasSmierci + czasRespawn* 1000 < System.currentTimeMillis()) return false;
-        return utworzWilka(wlasciciel);
+        else{
+            System.out.println("[Wilk] - respawn wilka.");
+            return utworzWilka(wlasciciel);
+        }
     };
 
     /**
@@ -133,7 +136,7 @@ public class WilkData {
             return false;
         }
         //najpierw sprawdzamy czas
-        if (czasOstatniaRegeneracja + czasRegeneracja*1000 > System.currentTimeMillis()){
+        if (czasOstatniaRegeneracja + (czasRegeneracja *1000) > System.currentTimeMillis()){
             AttributeInstance wilkMaxHp = wilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
             assert wilkMaxHp != null;
             if (wilk.getHealth()+1 <= wilkMaxHp.getValue()){

@@ -48,9 +48,10 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <outputDirectory>D:\BuildToolSpigot\plugins</outputDirectory>
+                    <outputDirectory>C:\SpigotServer\plugins</outputDirectory>
                 </configuration>
             </plugin>
+
         </plugins>
         <resources>
             <resource>
