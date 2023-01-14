@@ -12,6 +12,7 @@ import java.util.UUID;
 public class ZadanieTreser extends BukkitRunnable {
     private PerkSystem plugin;
     private PerkTreser zadanie;
+    ArrayList<UUID> doUsuniecia = new ArrayList<>();
 
     public ZadanieTreser(PerkSystem plugin) {
         this.plugin = plugin;
@@ -20,7 +21,8 @@ public class ZadanieTreser extends BukkitRunnable {
 
     @Override
     public void run() {
-        ArrayList<UUID> doUsuniecia = new ArrayList<>();
+        if (zadanie.wilkiBojowe.size() == 0) return;
+        doUsuniecia.clear();
         zadanie.wilkiBojowe.forEach((key, wilkData) -> {
             Player gracz = Bukkit.getPlayer(key);
             if (gracz == null){

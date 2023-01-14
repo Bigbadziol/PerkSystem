@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 public class PerkTreser extends Perk implements Listener {
     //Uwaga! klucz- uuid gracza, dane konkretnego wilka
-    public HashMap<UUID, WilkData> wilkiBojowe = new HashMap<>();
+    public static HashMap<UUID, WilkData> wilkiBojowe = new HashMap<>();
     public PerkTreser(PerkSystem plugin) {
         super(plugin);
         nazwaId= PerkStale.PERK_TRESER;
@@ -43,17 +44,25 @@ public class PerkTreser extends Perk implements Listener {
     @EventHandler
     public void onMojWilkHit(EntityDamageByEntityEvent e){
         //wstępnie wilk atakuje tylko graczy
-        if (e.getEntity().getType() != EntityType.PLAYER) return;
+        //System.out.println("-> Ofiara != player");
+        if (!(e.getEntity() instanceof Player)) return;
+
+        //System.out.println("-> Atakujacy wilkiem ?");
         if (!(e.getDamager() instanceof Wolf)) return;
         Wolf atakujacyWilk = (Wolf) e.getDamager(); //wilk jako entity
-        WilkData tenWilkData = wilkiBojowe.get(atakujacyWilk.getUniqueId()); //nasze dodatkowe dane
+        Player wlascicielWilka = (Player) atakujacyWilk.getOwner();
+        Player ofiara = (Player) e.getEntity();
+        //System.out.println("-> wilk ma wlasciciela ?");
+        if (wlascicielWilka == null) return; //wilk nie ma wlasciciela
+        //System.out.println("-> wilk bojowy ?, ilosc wilkow : "+ wilkiBojowe.size());
+        WilkData tenWilkData = wilkiBojowe.get(wlascicielWilka.getUniqueId()); //nasze dodatkowe dane
         if (tenWilkData == null) return; //to zaatakował inny wilk, bo nie jest na naszej liscie
 
         e.setCancelled(true);//przerywamy niejako domyslne działanie i nadpisujemy własne
+
         AttributeInstance maxHp = atakujacyWilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         double aktualneHp = atakujacyWilk.getHealth();
         double procentZycia = aktualneHp / maxHp.getValue();
-        System.out.println("[Treser](onHit) - Wilk hp :"+aktualneHp+" / "+maxHp.getValue()+" -> "+procentZycia+ " proc.");
         double silaAtaku = e.getFinalDamage();
         if (procentZycia <= tenWilkData.poziomRan){//zaistniala mozliwosc critowania
             Random rand = new Random();
@@ -63,7 +72,8 @@ public class PerkTreser extends Perk implements Listener {
                 silaAtaku = silaAtaku + (silaAtaku/2);
             }
         }
-        e.setDamage(silaAtaku);
+        System.out.println("[Treser](onHit)"+wlascicielWilka.getName()+" -> Wilk hp :"+tenWilkData.infoHp()+ " obrazenia : "+silaAtaku);
+        ofiara.damage(silaAtaku);
     }
 
     /**
@@ -82,6 +92,18 @@ public class PerkTreser extends Perk implements Listener {
         wilkiBojowe.put(e.getEntity().getUniqueId(),tenWilk);
         System.out.println("[Treser] - uaktualniono dane martwego wilka.");
     }
+
+    @EventHandler
+    public void onDisconnect(PlayerQuitEvent event){
+        Player gracz = event.getPlayer();
+        WilkData wilk  = wilkiBojowe.get(gracz.getUniqueId());
+        if (wilk != null){
+            System.out.println("[Treser] - zabijam wilka gracza :"+gracz.getName());
+            wilk.odwolaj();
+        }
+    }
+
+
     /**
      * Aktywuj działanie perka
      * @param gracz obiekt gracza
@@ -90,8 +112,8 @@ public class PerkTreser extends Perk implements Listener {
     public void aktywuj(Player gracz) {
         System.out.println("[AKTYWACJA]("+nazwaId+"): - start ");
         //teraz wilkData kontroluje czy wilk juz byl przyzwany
-        WilkData nowyWilk = new WilkData(gracz);
-        wilkiBojowe.put(gracz.getUniqueId(),nowyWilk);
+        wilkiBojowe.put(gracz.getUniqueId(),new WilkData(gracz));
+        System.out.println("Ilosc wilkow : "+ wilkiBojowe.size());
         System.out.println("[AKTYWACJA]("+nazwaId+"): - stop ");
     }
 
@@ -104,6 +126,7 @@ public class PerkTreser extends Perk implements Listener {
         System.out.println("[DEAKTYWACJA]("+nazwaId+"): - start ");
         WilkData wilk = wilkiBojowe.get(gracz.getUniqueId());
         if (wilk != null) wilk.odwolaj();
+        wilkiBojowe.remove(gracz.getUniqueId());
         System.out.println("[DEAKTYWACJA]("+nazwaId+"): - stop ");
     }
 }

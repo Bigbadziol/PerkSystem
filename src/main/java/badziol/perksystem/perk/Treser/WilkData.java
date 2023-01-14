@@ -12,6 +12,8 @@ import org.bukkit.entity.Wolf;
 
 import java.util.Objects;
 
+import static java.lang.Math.round;
+
 public class WilkData {
     private  Wolf wilk; //realny minecraftowy wilk ukryty w naszym obiekcie
     private  Player wlasciciel; //by mieć dostęp do pewnych danych na skróty
@@ -92,10 +94,13 @@ public class WilkData {
     }
 
     public void odwolaj(){
-        hpOstatnie = wilk.getHealth();
-        wilk.remove();
-        wilk = null;
-        System.out.println("[Wilk] - nastapilo odwolanie wilka");
+        if (wilk != null) {
+            hpOstatnie = wilk.getHealth();
+            wilk.setHealth(0);
+            //wilk.remove();
+            wilk = null;
+            System.out.println("[Wilk] - nastapilo odwolanie wilka");
+        }
     }
 
     public void atakuj(Player player){
@@ -118,9 +123,10 @@ public class WilkData {
             return false;
         }
         if (zyje) return false;
-        if (czasSmierci + czasRespawn* 1000 < System.currentTimeMillis()) return false;
+        if (czasSmierci + (czasRespawn* 1000) < System.currentTimeMillis()) return false;
         else{
             System.out.println("[Wilk] - respawn wilka.");
+            czasSmierci = System.currentTimeMillis();
             return utworzWilka(wlasciciel);
         }
     };
@@ -136,20 +142,38 @@ public class WilkData {
             return false;
         }
         //najpierw sprawdzamy czas
-        if (czasOstatniaRegeneracja + (czasRegeneracja *1000) > System.currentTimeMillis()){
+        if (System.currentTimeMillis()> czasOstatniaRegeneracja + (czasRegeneracja * 1000)){
             AttributeInstance wilkMaxHp = wilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
             assert wilkMaxHp != null;
             if (wilk.getHealth()+1 <= wilkMaxHp.getValue()){
                 wilk.setHealth(wilk.getHealth()+1);
-                System.out.println("[Wilk] - uleczono o 1");
+                System.out.println("[Wilk] - uleczono o 1 : " + infoHp());
             }else{
                 wilk.setHealth(wilkMaxHp.getValue());
-                System.out.println("[Wilk] - w pelni sil.");
+                System.out.println("[Wilk] - w pelni sil  : "+ infoHp());
             }
+            czasOstatniaRegeneracja = System.currentTimeMillis()  + (czasRegeneracja * 1000);
             return true;
         }else return false;
     }
 
+    public String infoHp(){
+        String tmp = "";
+        if (wilk == null){
+            tmp +="(infoHp) wilk=null";
+            return tmp;
+        }
+        double hp = wilk.getHealth();
+        AttributeInstance maxHp = wilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+        double proc = Math.round(hp/maxHp.getValue() *100);
+        tmp = String.format("%.2f",hp);
+        tmp +="/";
+        tmp += String.format("%.2f",maxHp.getValue());
+        tmp +=" ";
+        tmp += proc;
+        tmp += "%";
+        return tmp;
+    }
     /**
      * Jak nazwa wskazuje, metoda do wyświetlania informacji pośrednich na temat tej klasy.
      */

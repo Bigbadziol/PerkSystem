@@ -94,8 +94,8 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.47");
-        System.out.println("-Prace nad uskrzydleniem ikara (bezpieczna / niebezpieczna) faza lotu");
+        System.out.println("(PerkSystem) wersja : 1.50");
+        System.out.println("-Powrot do tematu Tresera");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");

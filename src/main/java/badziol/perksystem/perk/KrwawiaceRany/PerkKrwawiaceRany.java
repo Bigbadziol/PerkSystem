@@ -114,7 +114,6 @@ public  class PerkKrwawiaceRany extends Perk implements Listener {
     public void onKrwawiacyGinie(PlayerDeathEvent event) {
         UUID graczaUid = event.getEntity().getUniqueId();
         krwawiacy.remove(graczaUid);
-        System.out.println("Wylaczono posmiertne krwawienie");
     }
 
     /**
