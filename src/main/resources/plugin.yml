@@ -36,4 +36,7 @@ commands:
   par:
     description: (testy)Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
     usage: </command>
+  kompas:
+    description: (test) Kompasu
+    usage: </command>
 

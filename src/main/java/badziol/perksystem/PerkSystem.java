@@ -1,5 +1,9 @@
 //07.01.2023 - LAPTOP
 //12.01 - duza zmiana to uskrzydlenie ikara
+//Bukkit Tutorial | Complex Particle Effects #1
+//https://www.youtube.com/watch?v=BJaD2AgXF_U
+//https://www.youtube.com/watch?v=XMeck_nTdVA
+
 /*
 //dodane - DOSTEP DO : https://www.spigotmc.org/resources/nbt-api.7939/
 <repository>
@@ -48,6 +52,8 @@ versja aktualna - https://modrinth.com/plugin/nbtapi/versions
 //28.12.2022 - dokonczony perk krwawienie
 package badziol.perksystem;
 
+import badziol.perksystem.RoboczePomysly.Kompas.KomendaKompas;
+import badziol.perksystem.RoboczePomysly.Kompas.PosiadaczeKompasow;
 import badziol.perksystem.komendy.TabPerk;
 import badziol.perksystem.komendy.KomendaPG;
 import badziol.perksystem.komendy.KomendaPerk;
@@ -81,6 +87,10 @@ public final class PerkSystem extends JavaPlugin {
     public PerkLista perkLista = new PerkLista(this);
     public PerkGui gui;
 
+    public PosiadaczeKompasow posiadaczeKompasow = new PosiadaczeKompasow(this);
+
+
+
     public static Plugin getPlugin() {
         return plugin;
     }
@@ -96,7 +106,7 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.51");
+        System.out.println("(PerkSystem) wersja : 1.54");
         System.out.println("-Join/Quit");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
@@ -129,6 +139,9 @@ public final class PerkSystem extends JavaPlugin {
         Objects.requireNonNull(getCommand("despeed")).setExecutor(new KomendaDespeed());
         Objects.requireNonNull(getCommand("ksiazka")).setExecutor(new KomendaKsiazka());
         Objects.requireNonNull(getCommand("par")).setExecutor(new KomendaParticles(this));
+
+        Objects.requireNonNull(getCommand("kompas")).setExecutor(new KomendaKompas(this));
+
         try {
             boolean wczytanie;
             boolean kontrola = false;
@@ -154,8 +167,6 @@ public final class PerkSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PerkKrwawiaceRany(this), this);
         getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
 
-        //zabawa czastkami
-        getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
 
         //ZADANIA
         //Ikar
@@ -167,6 +178,11 @@ public final class PerkSystem extends JavaPlugin {
         //Treser
         ZadanieTreser zadanieTreser = new ZadanieTreser(this);
         zadanieTreser.runTaskTimer(this,0L,20L);
+
+        //TESTY TESTY
+        getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
+        getServer().getPluginManager().registerEvents(new PosiadaczeKompasow(this),this);
+
 
         //TO MUSI BYC NA SAMYM KONCU
         getServer().getPluginManager().registerEvents(new ListenerJoin(this),this);
