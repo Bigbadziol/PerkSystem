@@ -72,7 +72,8 @@ public class PerkTreser extends Perk implements Listener {
                 silaAtaku = silaAtaku + (silaAtaku/2);
             }
         }
-        System.out.println("[Treser](onHit)"+wlascicielWilka.getName()+" -> Wilk hp :"+tenWilkData.infoHp()+ " obrazenia : "+silaAtaku);
+        System.out.println("[Treser](onHit)"+wlascicielWilka.getName()+" -> Wilk hp :"
+                +tenWilkData.infoHp()+ " obrazenia : "+silaAtaku);
         ofiara.damage(silaAtaku);
     }
 

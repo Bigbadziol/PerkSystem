@@ -138,7 +138,7 @@ public class WilkData {
      */
     public boolean regenerujHp(){
         if (wilk == null) {
-            System.out.println("[Wilk] - regeneracja , wilk jest nullem!");
+//            System.out.println("[Wilk] - regeneracja , wilk jest nullem!");
             return false;
         }
         //najpierw sprawdzamy czas
@@ -147,10 +147,10 @@ public class WilkData {
             assert wilkMaxHp != null;
             if (wilk.getHealth()+1 <= wilkMaxHp.getValue()){
                 wilk.setHealth(wilk.getHealth()+1);
-                System.out.println("[Wilk] - uleczono o 1 : " + infoHp());
+                System.out.println("[Wilk](regen) - uleczono o 1 : " + infoHp());
             }else{
                 wilk.setHealth(wilkMaxHp.getValue());
-                System.out.println("[Wilk] - w pelni sil  : "+ infoHp());
+                System.out.println("[Wilk](regen) - w pelni sil  : "+ infoHp());
             }
             czasOstatniaRegeneracja = System.currentTimeMillis()  + (czasRegeneracja * 1000);
             return true;

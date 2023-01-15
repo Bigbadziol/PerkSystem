@@ -53,7 +53,9 @@ import badziol.perksystem.komendy.KomendaPG;
 import badziol.perksystem.komendy.KomendaPerk;
 import badziol.perksystem.komendyTestowe.*;
 import badziol.perksystem.listeners.ListenerCzastki;
+import badziol.perksystem.listeners.ListenerJoin;
 import badziol.perksystem.listeners.ListenerMenu;
+import badziol.perksystem.listeners.ListenerQuit;
 import badziol.perksystem.perk.CiezkaLapa.PerkCiezkaLapa;
 import badziol.perksystem.perk.Ikar.ZadanieIkar;
 import badziol.perksystem.perk.Ikar.KomendaIkar;
@@ -94,8 +96,8 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.50");
-        System.out.println("-Powrot do tematu Tresera");
+        System.out.println("(PerkSystem) wersja : 1.51");
+        System.out.println("-Join/Quit");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
@@ -151,6 +153,7 @@ public final class PerkSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PerkKevlar(this),this);
         getServer().getPluginManager().registerEvents(new PerkKrwawiaceRany(this), this);
         getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
+
         //zabawa czastkami
         getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
 
@@ -165,8 +168,9 @@ public final class PerkSystem extends JavaPlugin {
         ZadanieTreser zadanieTreser = new ZadanieTreser(this);
         zadanieTreser.runTaskTimer(this,0L,20L);
 
-
-        getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
+        //TO MUSI BYC NA SAMYM KONCU
+        getServer().getPluginManager().registerEvents(new ListenerJoin(this),this);
+        getServer().getPluginManager().registerEvents(new ListenerQuit(this),this);
     }
 
 
