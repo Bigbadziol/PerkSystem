@@ -38,17 +38,19 @@ public class KomendaKompas implements TabExecutor {
 
             }else if (args[0].equalsIgnoreCase("gracz")){
                 Kompas kompas = plugin.posiadaczeKompasow.wezKompas(player);
-                kompas.celGracz();
+                if (kompas != null)  kompas.celGracz();
 
             }else if (args[0].equalsIgnoreCase("smierc")){
                 Kompas kompas = plugin.posiadaczeKompasow.wezKompas(player);
-                kompas.celSmierc();
+                if (kompas != null)  kompas.celSmierc();
 
             }else if (args[0].equalsIgnoreCase("debug")){
                 System.out.println("[Kompas] - debug");
-                Kompas k = plugin.posiadaczeKompasow.wezKompas(player);
-                boolean res = k.wEkwipunku();
-                System.out.println("[Kompas] - jestem w ekwipunku :"+res);
+                Kompas kompas = plugin.posiadaczeKompasow.wezKompas(player);
+                if (kompas != null) {
+                    boolean res = kompas.wEkwipunku();
+                    System.out.println("[Kompas] - jestem w ekwipunku :" + res);
+                }
             }
 
         }

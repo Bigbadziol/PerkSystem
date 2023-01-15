@@ -1,8 +1,6 @@
 package badziol.perksystem.RoboczePomysly.Kompas;
 
 import badziol.perksystem.PerkSystem;
-import de.tr7zw.changeme.nbtapi.NBT;
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,9 +13,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class PosiadaczeKompasow   implements Listener {
-    private PerkSystem plugin;
+    private final PerkSystem plugin;
     private BukkitTask zadanieKompasy;
-    private static HashMap <UUID,Kompas> listaKompasow = new HashMap<>();
+    private static final HashMap <UUID,Kompas> listaKompasow = new HashMap<>();
 
     public PosiadaczeKompasow(PerkSystem plugin){
         this.plugin = plugin;
@@ -40,7 +38,6 @@ public class PosiadaczeKompasow   implements Listener {
 
     /**
      * Usun posiadacza 'perkowego kompasu' z listy
-     * @param wlasciciel
      */
     public void usunKompas(Player wlasciciel){
         listaKompasow.remove(wlasciciel.getUniqueId());
@@ -102,7 +99,9 @@ public class PosiadaczeKompasow   implements Listener {
         if (res){
             e.getItemDrop().remove();
             usunKompas(e.getPlayer());
-            e.getPlayer().setCompassTarget(e.getPlayer().getLastDeathLocation());
+            if (e.getPlayer().getLastDeathLocation() != null) {
+                e.getPlayer().setCompassTarget(e.getPlayer().getLastDeathLocation());
+            }
         }
     }
 }
