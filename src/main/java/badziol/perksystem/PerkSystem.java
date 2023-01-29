@@ -56,7 +56,6 @@ import badziol.perksystem.komendy.TabPerk;
 import badziol.perksystem.komendy.KomendaPG;
 import badziol.perksystem.komendy.KomendaPerk;
 import badziol.perksystem.komendyTestowe.*;
-import badziol.perksystem.listeners.ListenerCzastki;
 import badziol.perksystem.listeners.ListenerJoin;
 import badziol.perksystem.listeners.ListenerMenu;
 import badziol.perksystem.listeners.ListenerQuit;
@@ -90,7 +89,6 @@ public final class PerkSystem extends JavaPlugin {
     //public PosiadaczeKompasow posiadaczeKompasow = new PosiadaczeKompasow(this);
 
 
-
     public static Plugin getPlugin() {
         return plugin;
     }
@@ -106,7 +104,7 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.55");
+        System.out.println("(PerkSystem) wersja : 1.57");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
@@ -152,6 +150,7 @@ public final class PerkSystem extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PerkKevlar(this),this);
         getServer().getPluginManager().registerEvents(new PerkKrwawiaceRany(this), this);
         getServer().getPluginManager().registerEvents(new PerkTreser(this),this);
+        getServer().getPluginManager().registerEvents(new PerkLowca(this),this);
 
 
         //ZADANIA
@@ -164,14 +163,8 @@ public final class PerkSystem extends JavaPlugin {
         //Treser
         ZadanieTreser zadanieTreser = new ZadanieTreser(this);
         zadanieTreser.runTaskTimer(this,0L,20L);
-        //Lowca
-        getServer().getPluginManager().registerEvents(new PerkLowca(this),this);
-
 
         //TESTY TESTY
-        getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
-        //getServer().getPluginManager().registerEvents(new PosiadaczeKompasow(this),this);
-
 
         //TO MUSI BYC NA SAMYM KONCU
         getServer().getPluginManager().registerEvents(new ListenerJoin(this),this);

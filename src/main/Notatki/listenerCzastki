@@ -1,17 +1,4 @@
-package badziol.perksystem.listeners;
-
-
-import org.bukkit.*;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.Random;
-
-public class ListenerCzastki  implements Listener {
+ublic class ListenerCzastki  implements Listener {
 
     @EventHandler
     public  void onRuchGracza(PlayerMoveEvent event){

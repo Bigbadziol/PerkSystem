@@ -13,7 +13,7 @@ commands:
     description: Uruchomienie Ikara komenda
     usage: </command>
   lowca:
-    description: (test) Kompasu
+    description: Komenda pomocnicza dla perka Lowca, obslugiwane parametry daj, gracz smierc
     usage: </command>
   ser64:
     description: (testy)Komenda do serializowania przedmiotu w lewej rece metoda base64
@@ -21,23 +21,6 @@ commands:
   serjson:
     description:  (testy)Komenda do serializowania przedmiotu w lewej rece json
     usage: </command>
-  cd:
-    description:  (testy)Test cooldownu do dowolnej rzeczy, pod perki
-    usage: </command>
-  lot:
-    description: (testy)Test innego przekazania danych do komendy
-    usage: </command>
-  speed:
-    description: (testy)Zmiana atrybutow generycznych, szybsze chodzenie
-    usage: </command>
-  despeed:
-    description: (testy)Zmiana atrybutow generycznych , powrot do domyslnej wartosci
-    usage: </command>
-  ksiazka:
-    description: (testy)Tworzenie ksiazki z opisem
-    usage: </command>
-  par:
-    description: (testy)Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
-    usage: </command>
+
 
 

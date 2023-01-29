@@ -163,12 +163,25 @@ public class KompasLowcy {
      * Gracz w każdej chwili może wyrzucić przedmiot.
      * @return - true, jeśli przedmiot nadal występuje w ekwipunku gracza.
      */
-    boolean wEkwipunku(){
+    public boolean wEkwipunku(){
         ItemStack[] przedmioty  = wlasciciel.getInventory().getContents();
         boolean res;
         for (ItemStack tenPrzedmiot : przedmioty) {
             res = perkowyKompas(tenPrzedmiot);
             if (res) return true;
+        }
+        return false;
+    }
+
+    public boolean zniszczPrzedmiot(){
+        ItemStack[] przedmioty  = wlasciciel.getInventory().getContents();
+        boolean res;
+        for (ItemStack tenPrzedmiot : przedmioty) {
+            res = perkowyKompas(tenPrzedmiot);
+            if (res) {
+                wlasciciel.getInventory().remove(tenPrzedmiot);
+                return true;
+            }
         }
         return false;
     }

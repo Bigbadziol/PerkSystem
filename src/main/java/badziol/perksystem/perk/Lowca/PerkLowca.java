@@ -40,7 +40,7 @@ public class PerkLowca extends Perk  implements Listener {
      * Dodaj nowego gracza do listy posiadaczy kompasow namierzających najbliższego gracza
      * @param nowyWlasciciel - jak nazwa wskazuje
      */
-    public void dodajKompas(Player nowyWlasciciel){
+    public void dodajPosiadacza(Player nowyWlasciciel){
         if (nowyWlasciciel == null) {
             System.out.println("[KompasLista](dodaj) - nowy wlasciciel to null");
             return;
@@ -54,7 +54,7 @@ public class PerkLowca extends Perk  implements Listener {
     /**
      * Usun posiadacza 'perkowego kompasu' z listy
      */
-    public void usunKompas(Player wlasciciel){
+    public void usunPosiadacza(Player wlasciciel){
         listaKompasow.remove(wlasciciel.getUniqueId());
     }
 
@@ -112,10 +112,44 @@ public class PerkLowca extends Perk  implements Listener {
         System.out.println("Wypadl perkowy kompas  : "+ res);
         if (res){
             e.getItemDrop().remove();
-            usunKompas(e.getPlayer());
+            usunPosiadacza(e.getPlayer());
             if (e.getPlayer().getLastDeathLocation() != null) {
                 e.getPlayer().setCompassTarget(e.getPlayer().getLastDeathLocation());
             }
         }
+    }
+
+
+    /**
+     * Aktywuj dzialanie perka
+     *  Metoda dodaje lotnika jesli jest taka potrzeba. Czy sa spelnione warunki
+     *  dotyczace zdrowi , glodu oraz ograniczen czasowych.
+     * @param gracz obiekt gracza
+     */
+    @Override
+    public void aktywuj(Player gracz) {
+        System.out.println("[AKTYWACJA]: "+nazwaId+" - start");
+        //sprawdzic czy jest w ekwipunku , jesli nie to utworzyc
+        //wsadzic do slotu , lub reki
+        KompasLowcy tmpKompas = new KompasLowcy(plugin,gracz);
+        if (!tmpKompas.wEkwipunku()){
+            dodajPosiadacza(gracz);
+        }
+        System.out.println("[AKTYWACJA]: "+nazwaId+" :  dla : "+gracz.getName()+" -sukces");
+    }
+
+    /**
+     * Dzialania niezbedne na zdarzenie zdjecia perka
+     * @param gracz obiekt gracza
+     */
+    @Override
+    public  void dezaktywuj(Player gracz){
+        System.out.println("[DEAKTYWACJA](Lowca): "+nazwaId+" - start ");
+        //usunac przedmiot
+        KompasLowcy tmpKompas = new KompasLowcy(plugin,gracz);
+        tmpKompas.zniszczPrzedmiot();
+        usunPosiadacza(gracz);
+        System.out.println("[DEAKTYWACJA](Lowca) - napisac!");
+
     }
 }
