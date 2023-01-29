@@ -52,8 +52,6 @@ versja aktualna - https://modrinth.com/plugin/nbtapi/versions
 //28.12.2022 - dokonczony perk krwawienie
 package badziol.perksystem;
 
-import badziol.perksystem.RoboczePomysly.Kompas.KomendaKompas;
-import badziol.perksystem.RoboczePomysly.Kompas.PosiadaczeKompasow;
 import badziol.perksystem.komendy.TabPerk;
 import badziol.perksystem.komendy.KomendaPG;
 import badziol.perksystem.komendy.KomendaPerk;
@@ -68,6 +66,8 @@ import badziol.perksystem.perk.Ikar.KomendaIkar;
 import badziol.perksystem.perk.Kevlar.PerkKevlar;
 import badziol.perksystem.perk.KrwawiaceRany.PerkKrwawiaceRany;
 import badziol.perksystem.perk.KrwawiaceRany.ZadanieKrwawiaceRany;
+import badziol.perksystem.perk.Lowca.KomendaLowca;
+import badziol.perksystem.perk.Lowca.PerkLowca;
 import badziol.perksystem.perk.Niejadek.PerkNiejadek;
 import badziol.perksystem.perk.PerkLista;
 import badziol.perksystem.perk.Treser.PerkTreser;
@@ -87,7 +87,7 @@ public final class PerkSystem extends JavaPlugin {
     public PerkLista perkLista = new PerkLista(this);
     public PerkGui gui;
 
-    public PosiadaczeKompasow posiadaczeKompasow = new PosiadaczeKompasow(this);
+    //public PosiadaczeKompasow posiadaczeKompasow = new PosiadaczeKompasow(this);
 
 
 
@@ -106,41 +106,27 @@ public final class PerkSystem extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         System.out.println("------------------------------------------");
-        System.out.println("(PerkSystem) wersja : 1.54");
-        System.out.println("-Join/Quit");
+        System.out.println("(PerkSystem) wersja : 1.55");
         System.out.println("      --- Komendy wlasciwe ---");
         System.out.println("/perk - wstepny zarys / idea ");
         System.out.println("/pg - graficzny interfejs PerkSystem");
         System.out.println("/ikar - urucham 'aktywny' perk pozwalajacy latac");
+        System.out.println("/lowca [daj] - utworz przedmiot , [gracz] ustawi cel na gracza , [smierc] - ustawi na miejsce zgonu");
         System.out.println();
         System.out.println("--- Komendy pomocnicze ---");
         System.out.println("/ser64 - serializowanie obiektu (lewa reka) metoda Base64 ");
         System.out.println("/serjson - serializowanie obiektu (lewa eka) gsonem");
-        System.out.println("/cd - test  odpalenia czegos na cooldown, domyslnie 5 sek");
-        System.out.println("/lot - test przekazania referencji do pluginu w inny sposob.");
-        System.out.println("/speed - szybsze chodzenie - zmiana atrybutow postaci");
-        System.out.println("/despeed - walniejsze chodzenie - jak wyzej.");
-        System.out.println("/ksiazka - tworzenie i otwieranie ksiazki");
-        System.out.println("/cooldown - blokowanie samej z siebie komendy na okreslony czas");
-        System.out.println("/par [liczba] 1...n - testowanie roznych typow czastek");
         System.out.println("------------------------------------------");
         Objects.requireNonNull(getCommand("perk")).setExecutor(new KomendaPerk(this));
         Objects.requireNonNull(getCommand("perk")).setTabCompleter(new TabPerk(this));
 
         Objects.requireNonNull(getCommand("pg")).setExecutor(new KomendaPG(this));
         Objects.requireNonNull(getCommand("ikar")).setExecutor(new KomendaIkar(this));
-
+        Objects.requireNonNull(getCommand("lowca")).setExecutor(new KomendaLowca(this));
 
         Objects.requireNonNull(getCommand("ser64")).setExecutor(new KomendaSerializeBase64());
         Objects.requireNonNull(getCommand("serjson")).setExecutor(new KomendaSerializeJson());
-        Objects.requireNonNull(getCommand("cd")).setExecutor(new KomendaCooldown());
-        Objects.requireNonNull(getCommand("lot")).setExecutor(new KomendaLot(this));
-        Objects.requireNonNull(getCommand("speed")).setExecutor(new KomendaSpeed());
-        Objects.requireNonNull(getCommand("despeed")).setExecutor(new KomendaDespeed());
-        Objects.requireNonNull(getCommand("ksiazka")).setExecutor(new KomendaKsiazka());
-        Objects.requireNonNull(getCommand("par")).setExecutor(new KomendaParticles(this));
 
-        Objects.requireNonNull(getCommand("kompas")).setExecutor(new KomendaKompas(this));
 
         try {
             boolean wczytanie;
@@ -178,10 +164,13 @@ public final class PerkSystem extends JavaPlugin {
         //Treser
         ZadanieTreser zadanieTreser = new ZadanieTreser(this);
         zadanieTreser.runTaskTimer(this,0L,20L);
+        //Lowca
+        getServer().getPluginManager().registerEvents(new PerkLowca(this),this);
+
 
         //TESTY TESTY
         getServer().getPluginManager().registerEvents(new ListenerCzastki(),this);
-        getServer().getPluginManager().registerEvents(new PosiadaczeKompasow(this),this);
+        //getServer().getPluginManager().registerEvents(new PosiadaczeKompasow(this),this);
 
 
         //TO MUSI BYC NA SAMYM KONCU

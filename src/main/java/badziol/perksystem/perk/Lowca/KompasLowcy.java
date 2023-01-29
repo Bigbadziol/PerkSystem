@@ -1,4 +1,4 @@
-package badziol.perksystem.RoboczePomysly.Kompas;
+package badziol.perksystem.perk.Lowca;
 
 import badziol.perksystem.PerkSystem;
 import de.tr7zw.changeme.nbtapi.NBT;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.CompassMeta;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Kompas  {
+public class KompasLowcy {
     private final PerkSystem plugin;
     private final ItemStack kompas;
     private final String nbtNazwaPrzedmiotu="nazwaPrzedmiotu";
@@ -27,7 +27,7 @@ public class Kompas  {
      * @param plugin - referencja do korzenia
      * @param wlasciciel - właściciel
      */
-    public Kompas(PerkSystem plugin, Player wlasciciel){
+    public KompasLowcy(PerkSystem plugin, Player wlasciciel){
         this.plugin = plugin;
         this.wlasciciel = wlasciciel;
         cel = null;
@@ -35,7 +35,7 @@ public class Kompas  {
         kompas = new ItemStack(Material.COMPASS ,1);
         CompassMeta meta = (CompassMeta) kompas.getItemMeta();
         if (meta != null) {
-            meta.setDisplayName("Perk Kompas");
+            meta.setDisplayName("Kompas lowcy");
             ArrayList<String> opis = new ArrayList<>();
             opis.add("Ten kompas pozwala ci wykryć");
             opis.add("najbliższego gracza");

@@ -16,8 +16,9 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class PerkKevlar extends Perk implements Listener {
-    private PerkKevlarData pkd = new PerkKevlarData(); //tu przechowywane sa wszystkie dane osob z kevlarem
+    private PerkKevlarData pkd = new PerkKevlarData(); //tu przechowywane sa ws// zystkie dane osob z kevlarem
     public final HashMap<UUID, PerkKevlarData> opancezeni = new HashMap<>();
+
     public  PerkKevlar(PerkSystem plugin){
         super(plugin);
         nazwaId= PerkStale.PERK_KEVLAR;

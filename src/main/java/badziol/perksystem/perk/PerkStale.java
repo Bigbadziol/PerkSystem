@@ -13,6 +13,7 @@ public class PerkStale {
     public static final String PERK_SPRINTER="sprinter";
     public static final String PERK_WAMPIR="wampir";
     public static final String PERK_TRESER="treser";
+    public static final String PERK_LOWCA="lowca";
 
     public static final int LIMIT_AKTYWNYCH_MIN = 1;
     public static final int LIMIT_AKTYWNYCH_MAX = 5;

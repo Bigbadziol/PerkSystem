@@ -12,6 +12,9 @@ commands:
   ikar:
     description: Uruchomienie Ikara komenda
     usage: </command>
+  lowca:
+    description: (test) Kompasu
+    usage: </command>
   ser64:
     description: (testy)Komenda do serializowania przedmiotu w lewej rece metoda base64
     usage: </command>
@@ -36,7 +39,5 @@ commands:
   par:
     description: (testy)Komenda to sprawdzania roznych typow czastek , przymuje parametr 1...n
     usage: </command>
-  kompas:
-    description: (test) Kompasu
-    usage: </command>
+
 

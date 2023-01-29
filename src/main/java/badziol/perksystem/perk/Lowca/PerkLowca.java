@@ -1,6 +1,8 @@
-package badziol.perksystem.RoboczePomysly.Kompas;
+package badziol.perksystem.perk.Lowca;
 
 import badziol.perksystem.PerkSystem;
+import badziol.perksystem.perk.Perk;
+import badziol.perksystem.perk.PerkStale;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,13 +14,26 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class PosiadaczeKompasow   implements Listener {
-    private final PerkSystem plugin;
-    private BukkitTask zadanieKompasy;
-    private static final HashMap <UUID,Kompas> listaKompasow = new HashMap<>();
+public class PerkLowca extends Perk  implements Listener {
 
-    public PosiadaczeKompasow(PerkSystem plugin){
-        this.plugin = plugin;
+    private BukkitTask zadanieKompasy;
+    private static final HashMap<UUID, KompasLowcy> listaKompasow = new HashMap<>();
+
+    public PerkLowca(PerkSystem plugin){
+        super(plugin);
+        nazwaId = PerkStale.PERK_LOWCA;
+        wyswietlanie = "Nawigacja do graczy";
+        opis.add("Wygrywa ten kto pierwszy");
+        opis.add("zobaczy przeciwnika.");
+        opis.add("");
+        opis.add("Pokazuje kierunek do najbliszego");
+        opis.add("przeciwnika.");
+        textura = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW" +
+                "5lY3JhZnQubmV0L3RleHR1cmUvMTBlMTBhZjUxMTQ1N2RmOTNkNDgzMDJjYTY5MTY3Mzh" +
+                "lOTYxOGJlZjdjMTVlZmYzMjRhOTQyZjFhZGU5YmZmZCJ9fX0=";
+        inicjujGlowke();
+
+
     }
 
     /**
@@ -30,7 +45,7 @@ public class PosiadaczeKompasow   implements Listener {
             System.out.println("[KompasLista](dodaj) - nowy wlasciciel to null");
             return;
         }
-        Kompas nowyKompas = new Kompas(plugin,nowyWlasciciel);
+        KompasLowcy nowyKompas = new KompasLowcy(plugin,nowyWlasciciel);
         nowyKompas.utworzKompas(); //czyli ma sie pojawic w ekwipunku
         listaKompasow.put(nowyWlasciciel.getUniqueId(), nowyKompas);
         if (listaKompasow.size() == 1) zadanieKompasyStart();
@@ -49,7 +64,7 @@ public class PosiadaczeKompasow   implements Listener {
      * @return true- jeśli to nasz przedmiot
      */
     public boolean perkowyKompas(ItemStack przedmiot){
-        Kompas tmpKompas = new Kompas(plugin,null);
+        KompasLowcy tmpKompas = new KompasLowcy(plugin,null);
         return tmpKompas.perkowyKompas(przedmiot);
     }
 
@@ -58,10 +73,9 @@ public class PosiadaczeKompasow   implements Listener {
      * @param wlasciciel kompasu
      * @return jego kompas lub null, jeśli nie znaleziono właściciela
      */
-    public Kompas wezKompas(Player wlasciciel){
+    public KompasLowcy wezKompas(Player wlasciciel){
         return listaKompasow.get(wlasciciel.getUniqueId());
     }
-
 
     /**
      *  Rozpocznij zadanie obsługi kompasów.
@@ -73,10 +87,10 @@ public class PosiadaczeKompasow   implements Listener {
         zadanieKompasy = new BukkitRunnable() {
             @Override
             public void run() {
-               if (listaKompasow.isEmpty())  zadanieKompasy.cancel(); // nie ma 'perkowych kompasow' - zadanie nie potrzebne
-               listaKompasow.forEach((klucz,kompas)->{
-                   Player tenGracz = plugin.getServer().getPlayer(klucz);
-                   if (tenGracz == null) return;
+                if (listaKompasow.isEmpty())  zadanieKompasy.cancel(); // nie ma 'perkowych kompasow' - zadanie nie potrzebne
+                listaKompasow.forEach((klucz,kompas)->{
+                    Player tenGracz = plugin.getServer().getPlayer(klucz);
+                    if (tenGracz == null) return;
                     if (kompas.wEkwipunku()){
                         kompas.celGracz();
                     }else {

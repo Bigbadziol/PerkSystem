@@ -5,6 +5,7 @@ import badziol.perksystem.perk.CiezkaLapa.PerkCiezkaLapa;
 import badziol.perksystem.perk.Ikar.PerkIkar;
 import badziol.perksystem.perk.Kevlar.PerkKevlar;
 import badziol.perksystem.perk.KrwawiaceRany.PerkKrwawiaceRany;
+import badziol.perksystem.perk.Lowca.PerkLowca;
 import badziol.perksystem.perk.Niejadek.PerkNiejadek;
 import badziol.perksystem.perk.Nieustawiony.PerkNiesustawiony;
 import badziol.perksystem.perk.Sprinter.PerkSprinter;
@@ -42,6 +43,7 @@ public class PerkLista {
         wszystkiePerki.add(new PerkKevlar(this.plugin));
         wszystkiePerki.add(new PerkKrwawiaceRany(this.plugin));
         wszystkiePerki.add(new PerkTreser(this.plugin));
+        wszystkiePerki.add(new PerkLowca(this.plugin));
     }
 
     /**
