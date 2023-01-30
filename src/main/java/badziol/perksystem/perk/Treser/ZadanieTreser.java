@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class ZadanieTreser extends BukkitRunnable {
-    private PerkSystem plugin;
-    private PerkTreser zadanie;
+    private final PerkSystem plugin;
+    private final PerkTreser zadanie;
     ArrayList<UUID> doUsuniecia = new ArrayList<>();
 
     public ZadanieTreser(PerkSystem plugin) {

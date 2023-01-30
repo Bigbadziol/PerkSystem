@@ -15,6 +15,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -34,8 +35,29 @@ public class PerkTreser extends Perk implements Listener {
         inicjujGlowke();
     }
 
+    public boolean wilkNaLiscie(UUID uuidWilka){
+        //wilkiBojowe.forEach((graczUuid, wilkData) -> {
+        ///    if (uuidWilka == wilkData.uuidWilka()) return true;
+        //});
+
+        for (Map.Entry<UUID,WilkData> dane :
+             wilkiBojowe.entrySet()) {
+             if (uuidWilka == dane.getValue().uuidWilka()) return true;
+        }
+        return false;
+    }
+
+    private WilkData wilkZListy(UUID uuidWilka){
+        for (Map.Entry<UUID,WilkData> dane :
+                wilkiBojowe.entrySet()) {
+            if (uuidWilka == dane.getValue().uuidWilka()) return dane.getValue();
+        }
+        return null;
+    }
+
+
     /**
-     * Atak wilka, sposob działania.
+     * Atak wilka, sposób działania.
      * Wilk atakuje tylko graczy. Poniżej określonego poziomu życia wilk zyskuje szansę zadawania
      * krytycznych ciosów. Każdy cios ma określoną szansę na bycie ciosem krytycznym.
      * Przykładowo poniżej 60% życia wilk ma 35% szansę na zadanie krytycznego ciosu.
@@ -58,7 +80,7 @@ public class PerkTreser extends Perk implements Listener {
         WilkData tenWilkData = wilkiBojowe.get(wlascicielWilka.getUniqueId()); //nasze dodatkowe dane
         if (tenWilkData == null) return; //to zaatakował inny wilk, bo nie jest na naszej liscie
 
-        e.setCancelled(true);//przerywamy niejako domyslne działanie i nadpisujemy własne
+        e.setCancelled(true);//przerywamy niejako domyślne działanie i nadpisujemy własne
 
         AttributeInstance maxHp = atakujacyWilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
         double aktualneHp = atakujacyWilk.getHealth();
@@ -67,13 +89,14 @@ public class PerkTreser extends Perk implements Listener {
         if (procentZycia <= tenWilkData.poziomRan){//zaistniala mozliwosc critowania
             Random rand = new Random();
             double los = rand.nextDouble(0,1.001);
-            if (los > tenWilkData.critSzansa){
-                System.out.println("[Treser](onHit) - cios krytyczny (150%).");
+            if (los <= tenWilkData.critSzansa){
+//                System.out.println("[Treser](onHit) - cios krytyczny (150%).");
                 silaAtaku = silaAtaku + (silaAtaku/2);
             }
         }
+        String  tmp = String.format("%.2f",silaAtaku);
         System.out.println("[Treser](onHit)"+wlascicielWilka.getName()+" -> Wilk hp :"
-                +tenWilkData.infoHp()+ " obrazenia : "+silaAtaku);
+                +tenWilkData.infoHp()+ "   zadal obr.: "+tmp);
         ofiara.damage(silaAtaku);
     }
 
@@ -85,15 +108,26 @@ public class PerkTreser extends Perk implements Listener {
     @EventHandler
     public void onWilkDeath(EntityDeathEvent e){
         if (e.getEntityType() != EntityType.WOLF) return; //nie wilk
-        WilkData tenWilk = wilkiBojowe.get(e.getEntity().getUniqueId()); //poszukujemy wilka na naszej liście
+        WilkData tenWilk = wilkZListy(e.getEntity().getUniqueId());
         if (tenWilk == null) return; // to nie nasz wilk.
         System.out.println("[Treser] - nasz wilk zginal.");
-        tenWilk.zyje = false;
-        tenWilk.czasSmierci = System.currentTimeMillis();
-        wilkiBojowe.put(e.getEntity().getUniqueId(),tenWilk);
-        System.out.println("[Treser] - uaktualniono dane martwego wilka.");
+
+        UUID uuidWlasciciel = tenWilk.uuidWlasciciela(); // za wczasu trzeba poprac dane
+        if (uuidWlasciciel != null){
+            tenWilk.zyje = false;
+            tenWilk.czasSmierci = System.currentTimeMillis();
+            tenWilk.zerujWilka(); // waznie nie odwolywac
+            wilkiBojowe.put(uuidWlasciciel,tenWilk);
+//            System.out.println("[Treser] - uaktualniono dane martwego wilka.");
+        }else {
+            System.out.println("[Treser] - BLAD ! klucz do mapy(uuid wlasciciela) niezgodne z wlascicielem(ownerem) samego wilka.");
+        }
     }
 
+    /**
+     * Zabij wilka wraz z wylogowaniem się gracza.
+     * @param event zdarzenie serwerowe
+     */
     @EventHandler
     public void onDisconnect(PlayerQuitEvent event){
         Player gracz = event.getPlayer();
@@ -103,7 +137,6 @@ public class PerkTreser extends Perk implements Listener {
             wilk.odwolaj();
         }
     }
-
 
     /**
      * Aktywuj działanie perka

@@ -9,10 +9,8 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
-
 import java.util.Objects;
-
-import static java.lang.Math.round;
+import java.util.UUID;
 
 public class WilkData {
     private  Wolf wilk; //realny minecraftowy wilk ukryty w naszym obiekcie
@@ -21,12 +19,13 @@ public class WilkData {
     public final int czasRespawn = 30; //Po śmierci psa ten się odrodzi po tym czasie automatycznie. Czas w sekundach.
     public final int czasRegeneracja = 10; //Po jakim czasie wilk odzyska 1 punkt hp. Czas w sekundach.
     private final int hpBazowe = 25; // maxymalne hp naszego wilka, domyślna: 20
-    public final double poziomRan =0.5d; // 0.5 , oznacza,że poniżej 50% maksymalnego życia wilk jest bardziej
+    public final double poziomRan =0.5D; // 0.5 , oznacza,że poniżej 50% maksymalnego życia wilk jest bardziej
     // niebezpieczny i zyskuje możliwość zadawania krytycznych obrażeń
-    public final double critSzansa = 0.3d; //0.3 oznacza 30% szansę zadania krytycznego ciosu
+    public final double critSzansa = 0.3D; //0.3 oznacza 30% szansę zadania krytycznego ciosu
     private final double atakBaza = 2; //na tej podstawie liczone są wszystkie obrażenia, domyśla : 2.0
-    private final double knockbackRes = 1.0d; //odrzut na cios , domyślna : 0.0
-    private final double szybkosc = 0.75d; // szybkosc poruszania sie naszego przyzwanca, domyślna 0.7
+    //private final double knockbackRes = 1.0d; //odrzut na cios , domyślna : 0.0 (nie procentowo - wartość minecraftowa)
+    private final  double knock = 2.0D; //... przy wartości parametru 0, 1 - wilk nie odrzuca , 2 realnie działa
+    private final double szybkosc = 0.6D; // szybkosc poruszania sie naszego przyzwanca, domyślna 0.7
 
     public long czasSmierci = 0L; //zapamiętany czas ostatniej śmierci wilka
     public boolean zyje = true; // aktualny stan
@@ -79,8 +78,11 @@ public class WilkData {
         AttributeInstance wilkSzybkosc = wilkAtrybuty.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
         if (wilkSzybkosc!= null) wilkSzybkosc.setBaseValue(szybkosc);
 
-        AttributeInstance wilkKnockRes = wilkAtrybuty.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
-        if (wilkKnockRes != null) wilkKnockRes.setBaseValue(knockbackRes);
+        //AttributeInstance wilkKnockRes = wilkAtrybuty.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE);
+        //if (wilkKnockRes != null) wilkKnockRes.setBaseValue(knockbackRes);
+
+        AttributeInstance wilkKnock = wilkAtrybuty.getAttribute(Attribute.GENERIC_ATTACK_KNOCKBACK);
+        if (wilkKnock != null) wilkKnock.setBaseValue(knock);
 
         pierwszePrzyzwanie = false;
         czasSmierci = 0L;
@@ -89,27 +91,55 @@ public class WilkData {
         System.out.println("[Wilk](utworz)- utworzono nowego wilka.");
         return true;
     }
+
+    /**
+     * Konstruktor
+     * @param wlascicielWilka gracz dla którego ma byc utworzony wilk bojowy.
+     */
     public WilkData(Player wlascicielWilka){
         utworzWilka(wlascicielWilka);
     }
 
+    public UUID uuidWilka(){
+      return wilk.getUniqueId();
+    };
+
+    public UUID uuidWlasciciela(){
+        return wilk.getOwner().getUniqueId();
+    }
+
+    /**
+     *  Motoda niszczy-zabija minecraftowego wilka
+     */
     public void odwolaj(){
         if (wilk != null) {
             hpOstatnie = wilk.getHealth();
             wilk.setHealth(0);
-            //wilk.remove();
             wilk = null;
-            System.out.println("[Wilk] - nastapilo odwolanie wilka");
+            System.out.println("[Wilk] - nastapilo odwolanie/zabicie wilka");
         }
     }
 
+    /**
+     * Uwaga metoda ma charakter czysto pomocniczy. Nadal chcemy aby wilk był prywatny.
+     * Musimy wyzerować nasz obiekt wilka po śmierci
+     */
+    public void zerujWilka(){
+        wilk = null;
+    }
+
+
+    /**
+     *  Metoda odpowiedzialna za zaatakowanie przyzwanym wilkiem przeciwnego gracza
+     *  W domyśle napisać komendę, która pozwoli zainicjować walkę na odległość przyzwańcem
+     * @param player cel do ataku
+     */
     public void atakuj(Player player){
         System.out.println("[Wilk] - wlasciciel:"+
                 Objects.requireNonNull(wilk.getOwner()).getName()+
                 " --> "+player.getName());
         wilk.attack(player);
     }
-
 
     /**
      * Metoda "odtwarza" martwego wilka. Metoda dedykowana zadaniu obsługującemu wilki bojowe.<br>
@@ -123,13 +153,15 @@ public class WilkData {
             return false;
         }
         if (zyje) return false;
-        if (czasSmierci + (czasRespawn* 1000) < System.currentTimeMillis()) return false;
-        else{
-            System.out.println("[Wilk] - respawn wilka.");
-            czasSmierci = System.currentTimeMillis();
+        if ( System.currentTimeMillis() > (czasSmierci + (czasRespawn* 1000)) ) {
+            System.out.println("[Wilk] - respawn wilka -> "+wlasciciel.getName());
+            //czasSmierci = System.currentTimeMillis();
+            zyje = true;
             return utworzWilka(wlasciciel);
+        }else {
+            return false;
         }
-    };
+    }
 
     /**
      * Metoda przywraca istniejącemu wilkowi 1 punkt życia co określoną jednostkę czasu.
@@ -141,7 +173,9 @@ public class WilkData {
 //            System.out.println("[Wilk] - regeneracja , wilk jest nullem!");
             return false;
         }
-        //najpierw sprawdzamy czas
+        // najpierw sprawdzamy czy wilk żyje
+        if (!zyje) return false;
+        //potem sprawdzamy czas
         if (System.currentTimeMillis()> czasOstatniaRegeneracja + (czasRegeneracja * 1000)){
             AttributeInstance wilkMaxHp = wilk.getAttribute(Attribute.GENERIC_MAX_HEALTH);
             assert wilkMaxHp != null;
@@ -150,13 +184,17 @@ public class WilkData {
                 System.out.println("[Wilk](regen) - uleczono o 1 : " + infoHp());
             }else{
                 wilk.setHealth(wilkMaxHp.getValue());
-                System.out.println("[Wilk](regen) - w pelni sil  : "+ infoHp());
+//                System.out.println("[Wilk](regen) - w pelni sil  : "+ infoHp());
             }
             czasOstatniaRegeneracja = System.currentTimeMillis()  + (czasRegeneracja * 1000);
             return true;
         }else return false;
     }
 
+    /**
+     *  Metoda pomocnicza, do debugowania zwracająca stringa z aktualnym stanem zdrowia przyzwanego wilka
+     * @return string z informacją o stanie zdrowia
+     */
     public String infoHp(){
         String tmp = "";
         if (wilk == null){
