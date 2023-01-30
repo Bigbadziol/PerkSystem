@@ -125,7 +125,7 @@ public class PerkLista {
             return tmp;
         }
         return null;
-    };
+    }
 
     /**
      *  Metoda wyszukuje posiadacza perkow o wskazanym imieniu.
@@ -177,7 +177,7 @@ public class PerkLista {
             ret.add(tenPerk.nazwaId);
         }
         return ret;
-    };
+    }
 
     /**
      * Pobierz index gracza z listy raczow na podstawie imienia
@@ -318,7 +318,7 @@ public class PerkLista {
             tenGracz.dodajPerkaZdobyty(perk.nazwaId);
         }
         return true;
-    };
+    }
 
     /**
      *  Usun perka graczowi o wskazanym imieniu z listy zdobytych prekow
@@ -509,7 +509,7 @@ public class PerkLista {
             }
         }
         return tmp;
-    };
+    }
     // ========================================================================================
     /**
      * Wczytaj dane z pliku

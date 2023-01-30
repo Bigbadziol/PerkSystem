@@ -86,9 +86,6 @@ public final class PerkSystem extends JavaPlugin {
     public PerkLista perkLista = new PerkLista(this);
     public PerkGui gui;
 
-    //public PosiadaczeKompasow posiadaczeKompasow = new PosiadaczeKompasow(this);
-
-
     public static Plugin getPlugin() {
         return plugin;
     }
@@ -100,6 +97,7 @@ public final class PerkSystem extends JavaPlugin {
     public String getServerVersion() {
         return VERSION;
     }
+
     @Override
     public void onEnable() {
         plugin = this;

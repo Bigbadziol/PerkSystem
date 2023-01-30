@@ -10,8 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.scheduler.BukkitRunnable;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -28,16 +26,10 @@ public abstract class Perk {
     public long czasAktywnosci = 0; //bo domyslnie pasywny
     public String textura="";
 
-    protected long efektStartCzas = 0;
-    protected long efektStopCzas = 0;
     public boolean efektWidoczny = false; //efekt w postaci czastek ma byc nalozony
-    public BukkitRunnable efekt;  //?? zdefiniowane w kazdym perku?
-
 
     public Perk(PerkSystem plugin){
-
         this.plugin = plugin;
-
     }
 
     /**
@@ -55,7 +47,11 @@ public abstract class Perk {
         System.out.println("[perk.temlate] - init :"+wyswietlanie);
     }
 
-    @SuppressWarnings("deprecation")
+
+    /**
+     * Nie używać! metoda z starego podejścia do problemu. Modyfikuje 'jsona' konkretnego obiektu.
+     * Wywołanie jej spowoduje nadpisanie danych 'meta' przedmiotu lub usunięcie nbt tagów.
+     */
     public ItemStack ustawTexture(ItemStack glowka, String value) {
         UUID id = UUID.nameUUIDFromBytes(value.getBytes());
         int less = (int) id.getLeastSignificantBits();
@@ -81,10 +77,8 @@ public abstract class Perk {
         });
 
         //zmodyfikuj texture glowki
-        //ciekawe czy to podejscie powoduje - mieszanie sie graficzne glowej ???
         SkullMeta meta = (SkullMeta) glowka.getItemMeta();
         assert meta != null;
-
         GameProfile profile = new GameProfile(UUID.randomUUID(), null);
         profile.getProperties().put("textures", new Property("textures", textura));
 
@@ -96,23 +90,10 @@ public abstract class Perk {
             e.printStackTrace();
         }
         glowka.setItemMeta(meta);
-        //zwroc obiekt
 
         return glowka;
     }
 
-    public void uruchomEfekt(long czas){
-        if (efekt != null){
-            if (czas==0){
-                efekt.runTaskTimer(plugin,0L,10L);
-            }else{
-
-            }
-        }
-    }
-    public void zatrzymajEfekt(){
-        if (efekt != null) efekt.cancel();
-    }
 
     public void aktywuj(Player gracz){
         System.out.println("[AKTYWACJA]: "+nazwaId+" [template].");

@@ -3,14 +3,12 @@ package badziol.perksystem.perk.Ikar;
 import badziol.perksystem.PerkSystem;
 import badziol.perksystem.perk.PerkStale;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ZadanieIkar extends BukkitRunnable {
-    private PerkSystem plugin;
-    private PerkIkar zadanieIkar;
+    private final PerkSystem plugin;
+    private final PerkIkar zadanieIkar;
 
 
     public ZadanieIkar(PerkSystem plugin) {

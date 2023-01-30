@@ -127,11 +127,9 @@ public class PerkIkar extends Perk implements Listener{
             long uplynelo  = (System.currentTimeMillis() - pid.lotRozpoczecie) / 1000;
             long czasBlokady = pid.blokada -  uplynelo;
             System.out.println("[Ikar] - blokada potrwa : "+czasBlokady+ "sek.");
-
             return false;
         }
-    };
-
+    }
 
     /**
      * Metoda pomocnicza pozwala nam sprawdzić, w jakiej fazie lotu znajduje się wskazany gracz.
@@ -314,8 +312,6 @@ public class PerkIkar extends Perk implements Listener{
         czastkaPozycja.setYaw((float) Math.toDegrees(yawRad));
         return czastkaPozycja;
     }
-
-
 
     /**
      * Aktywuj dzialanie perka

@@ -114,7 +114,7 @@ public class PosiadaczPerkow {
             if (aktywnePerki.get(i).equalsIgnoreCase(nazwa)) return i;
         }
         return -1;
-    };
+    }
 
     /**
      * Dodaj perka to listy aktywnych perkow
@@ -129,7 +129,6 @@ public class PosiadaczPerkow {
             System.out.println("[PP] - index poza rozmiarem tablicy.");
             return false;
         }
-
         aktywnePerki.set(index,nazwa);
         return true;
     };
@@ -154,8 +153,5 @@ public class PosiadaczPerkow {
             aktywnePerki.set(indexSzukany,zamiennik);
             return 1;
         }
-    };
-
-
-
+    }
 }

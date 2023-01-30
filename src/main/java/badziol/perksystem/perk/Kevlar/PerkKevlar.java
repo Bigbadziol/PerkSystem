@@ -34,6 +34,7 @@ public class PerkKevlar extends Perk implements Listener {
                 "ljNzUyMzQwZWU4MSJ9fX0=";
         inicjujGlowke();
     }
+
     @EventHandler
     public void onKevlar (EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player) {
@@ -48,10 +49,11 @@ public class PerkKevlar extends Perk implements Listener {
             }
         }
     }
+
     public PerkKevlarData pobierzOpencezonego(UUID uuid) {
         return opancezeni.get(uuid);
     }
-    private boolean mogeBoBlokadaCzasowa(Player tenGracz){
+         boolean mogeBoBlokadaCzasowa(Player tenGracz){
         UUID uuid = tenGracz.getUniqueId();
         if (!opancezeni.containsKey(uuid) ||
                 (System.currentTimeMillis() - pkd.czasAktywacji) > (pkd.blokada * 1000)) {
@@ -66,7 +68,8 @@ public class PerkKevlar extends Perk implements Listener {
 
             return false;
         }
-    };
+    }
+
     @Override
     public void aktywuj(Player gracz) {
         System.out.println("[AKTYWACJA]: "+nazwaId+" - start");
