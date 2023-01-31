@@ -26,7 +26,7 @@ public class SkrzydloKonfig {
     public SkrzydloKonfig() {
         //Przeczytaj opis konstruktora
         listaCzastek.add(new SkrzydloCzastka("x", Particle.CRIT_MAGIC, Color.fromRGB(0,0,0) ,0));
-        listaCzastek.add(new SkrzydloCzastka("o", Particle.SPELL_WITCH, Color.fromRGB(0,0,0), 0));
+        listaCzastek.add(new SkrzydloCzastka("o", Particle.CRIT, Color.fromRGB(0,0,0), 0));
         listaCzastek.add(new SkrzydloCzastka("h", Particle.CAMPFIRE_COSY_SMOKE, Color.fromRGB(0,0,0), 0));
         // rysujemy prawe skrzydło
         // wzor dla bezpiecznej fazy lotu
@@ -67,7 +67,7 @@ public class SkrzydloKonfig {
         skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,o,x,x,x,x,o");
         skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,o,x,x,x,o,x");
         skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,-,o,x,x,o,-");
-        skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,-,o,x,x,x,-");
+        skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,-,o,x,h,x,-");
         skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,-,-,o,x,x,-");
         skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,-,-,o,x,x,-");
         skrzydloWzorNiebezpiecznyLot.add("-,-,-,-,-,-,-,o,x,-");
