@@ -35,6 +35,14 @@ public class PerkTreser extends Perk implements Listener {
         inicjujGlowke();
     }
 
+    /**
+     * Metoda sprawdza, czy dany byt występuje na liście. Zostawiam ci synek ją (mimo że nie używana),
+     * bo masz podgląd na różnicę pomiędzy .forEach (nie wykona się bo przerywasz pełny przebieg po
+     * zbiorze danych, ale jeśli będziesz chciał coś w tych danych zmienić, to wszystko będzie spoko.
+     * Kolejne podejście pozwala ci przerwać działanie pętli w dowolnym momencie.
+     * @param uuidWilka
+     * @return
+     */
     public boolean wilkNaLiscie(UUID uuidWilka){
         //wilkiBojowe.forEach((graczUuid, wilkData) -> {
         ///    if (uuidWilka == wilkData.uuidWilka()) return true;
@@ -47,6 +55,11 @@ public class PerkTreser extends Perk implements Listener {
         return false;
     }
 
+    /**
+     * Metoda sprawdza, czy wilk znajduje się na liście perkowych wilków.
+     * @param uuidWilka lub bytu do sprawdzenia
+     * @return obiekt perkowego wilka lub null.
+     */
     private WilkData wilkZListy(UUID uuidWilka){
         for (Map.Entry<UUID,WilkData> dane :
                 wilkiBojowe.entrySet()) {
@@ -54,7 +67,6 @@ public class PerkTreser extends Perk implements Listener {
         }
         return null;
     }
-
 
     /**
      * Atak wilka, sposób działania.
